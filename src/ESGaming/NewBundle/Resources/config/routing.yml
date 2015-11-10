@@ -1,0 +1,3 @@
+es_gaming_new_homepage:
+    path:     /
+    defaults: { _controller: ESGamingNewBundle:News:index }
