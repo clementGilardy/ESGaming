@@ -1,3 +1,7 @@
+es_gaming_home:
+    resource: "@ESGamingHomeBundle/Resources/config/routing.yml"
+    prefix:   /
+
 es_gaming_new:
     resource: "@ESGamingNewBundle/Resources/config/routing.yml"
     prefix:   /

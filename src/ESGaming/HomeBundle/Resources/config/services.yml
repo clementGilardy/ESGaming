@@ -1,0 +1,4 @@
+services:
+#    es_gaming_home.example:
+#        class: ESGaming\HomeBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
