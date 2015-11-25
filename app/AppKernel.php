@@ -18,6 +18,7 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new ESGaming\NewBundle\ESGamingNewBundle(),
             new ESGaming\HomeBundle\ESGamingHomeBundle(),
+            new ESGaming\GameBundle\ESGamingGameBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
