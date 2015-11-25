@@ -1,0 +1,3 @@
+es_gaming_user_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: ESGamingUserBundle:User:index }
