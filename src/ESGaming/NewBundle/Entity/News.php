@@ -76,6 +76,10 @@ class News
      */
     private $type;
 
+    public function __construct()
+    {
+        $this->postDate = new \DateTime();
+    }
 
     /**
      * Get id
