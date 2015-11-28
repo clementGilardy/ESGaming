@@ -2,18 +2,23 @@
 <module type="WEB_MODULE" version="4">
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
-      <excludeFolder url="file://$MODULE_DIR$/vendor/composer" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/annotations" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/cache" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/collections" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/common" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/dbal" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/doctrine-bundle" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/doctrine-cache-bundle" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/inflector" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/instantiator" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/lexer" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/doctrine/orm" />
+      <sourceFolder url="file://$MODULE_DIR$/vendor/doctrine/annotations" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/vendor/doctrine/cache" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/vendor/doctrine/collections" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/vendor/doctrine/common" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/vendor/doctrine/dbal" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/vendor/doctrine/doctrine-bundle" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/vendor/doctrine/doctrine-cache-bundle" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/vendor/doctrine/inflector" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/vendor/doctrine/instantiator" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/vendor/doctrine/lexer" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/vendor/doctrine/orm" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/vendor/composer" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/vendor/symfony/assetic-bundle" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/vendor/symfony/monolog-bundle" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/vendor/symfony/swiftmailer-bundle" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/vendor/symfony/symfony" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/vendor/twig/twig" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/incenteev/composer-parameter-handler" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/jdorn/sql-formatter" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/kriswallsmith/assetic" />
@@ -24,21 +29,16 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/sensio/generator-bundle" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/sensiolabs/security-checker" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/swiftmailer/swiftmailer" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/assetic-bundle" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/monolog-bundle" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/swiftmailer-bundle" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/symfony" />
-      <excludeFolder url="file://$MODULE_DIR$/vendor/twig/twig" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library">
       <library name="PHARS">
         <CLASSES>
-          <root url="phar://$MODULE_DIR$/composer.phar/" />
+          <root url="phar://$MODULE_DIR$/vendor/symfony/symfony/src/Symfony/Component/DependencyInjection/Tests/Fixtures/includes/ProjectWithXsdExtensionInPhar.phar/" />
         </CLASSES>
         <SOURCES>
-          <root url="phar://$MODULE_DIR$/composer.phar/" />
+          <root url="phar://$MODULE_DIR$/vendor/symfony/symfony/src/Symfony/Component/DependencyInjection/Tests/Fixtures/includes/ProjectWithXsdExtensionInPhar.phar/" />
         </SOURCES>
       </library>
     </orderEntry>
