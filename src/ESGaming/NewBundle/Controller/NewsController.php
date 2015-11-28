@@ -10,4 +10,9 @@ class NewsController extends Controller
     {
         return $this->render('ESGamingNewBundle:News:index.html.twig');
     }
+
+    public function newAction($id)
+    {
+        return $this->render('ESGamingNewBundle:News:new.html.twig',array('id'=>$id));
+    }
 }

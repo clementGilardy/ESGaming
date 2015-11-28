@@ -8,7 +8,7 @@ es_gaming_home:
 
 es_gaming_new:
     resource: "@ESGamingNewBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /news
 
 es_gaming_user:
     resource: "@ESGamingUserBundle/Resources/config/routing.yml"
