@@ -55,7 +55,8 @@ class User implements UserInterface
     /**
      * @var integer
      *
-     * @ORM\Column(name="secret_question", type="integer")
+     * @ORM\OneToOne(targetEntity="ESGaming\UserBundle\Entity\Question")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $secretQuestion;
 
@@ -337,4 +338,3 @@ class User implements UserInterface
         // TODO: Implement eraseCredentials() method.
     }
 }
-
