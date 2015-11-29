@@ -3,7 +3,7 @@
 namespace ESGaming\NewBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * News
  *
@@ -22,7 +22,7 @@ class News
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="ESGaming\UserBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="ESGaming\UserBundle\Entity\User")
      * @ORM\JoinColumn(nullable=false)
      */
     private $author;
@@ -49,9 +49,14 @@ class News
     private $text;
 
     /**
+     * @Assert\File(maxSize="1M")
+     */
+    private $file;
+
+    /**
      * @var string
      *
-     * @ORM\Column(name="main_banner", type="string", length=255)
+     * @ORM\Column(name="main_banner", type="text", nullable=true)
      */
     private $mainBanner;
 
@@ -165,6 +170,56 @@ class News
         return $this->text;
     }
 
+    public function getFile()
+    {
+        return $this->file;
+    }
+
+    public function setFile($f)
+    {
+        $this->file = $f;
+    }
+
+    public function getUploadRootDir()
+    {
+        return __DIR__.'/../../../../web/'.$this->getUploadDir();
+    }
+
+    public function getUploadDir()
+    {
+        return 'uploads/main_banner';
+    }
+
+    /**
+     * @ORM\PrePersist()
+     * @ORM\PreUpdate()
+     */
+    public function preUpload()
+    {
+        if (null !== $this->file) {
+            // faites ce que vous voulez pour générer un nom unique
+            $this->mainBanner = sha1(uniqid(mt_rand(), true)).'.'.$this->file->guessExtension();
+        }
+    }
+
+    /**
+     * @ORM\PostPersist()
+     * @ORM\PostUpdate()
+     */
+    public function upload()
+    {
+        if (null === $this->file) {
+            return;
+        }
+
+        $this->file->move($this->getUploadRootDir(), $this->file->getClientOriginalName());
+
+        $this->mainBanner = $this->getUploadDir().'/'.$this->file->getClientOriginalName();
+
+        $this->file = null;
+    }
+
+
     /**
      * Set mainBanner
      *
@@ -214,54 +269,6 @@ class News
     }
 
     /**
-     * Set status
-     *
-     * @param integer $status
-     *
-     * @return News
-     */
-    public function setStatus($status)
-    {
-        $this->status = $status;
-
-        return $this;
-    }
-
-    /**
-     * Get status
-     *
-     * @return integer
-     */
-    public function getStatus()
-    {
-        return $this->status;
-    }
-
-    /**
-     * Set type
-     *
-     * @param boolean $type
-     *
-     * @return News
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    /**
-     * Get type
-     *
-     * @return boolean
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    /**
      * Set author
      *
      * @param \ESGaming\UserBundle\Entity\User $author
@@ -283,5 +290,53 @@ class News
     public function getAuthor()
     {
         return $this->author;
+    }
+
+    /**
+     * Set status
+     *
+     * @param \ESGaming\NewBundle\Entity\Status $status
+     *
+     * @return News
+     */
+    public function setStatus(\ESGaming\NewBundle\Entity\Status $status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return \ESGaming\NewBundle\Entity\Status
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * Set type
+     *
+     * @param \ESGaming\NewBundle\Entity\Type $type
+     *
+     * @return News
+     */
+    public function setType(\ESGaming\NewBundle\Entity\Type $type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return \ESGaming\NewBundle\Entity\Type
+     */
+    public function getType()
+    {
+        return $this->type;
     }
 }

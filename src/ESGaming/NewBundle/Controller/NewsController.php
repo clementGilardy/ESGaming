@@ -30,7 +30,7 @@ class NewsController extends Controller
             ->add('title','text')
             ->add('subtitle','text')
             ->add('text','textarea')
-            ->add('mainBanner','text')
+            ->add('file','file')
             ->add('status','entity',array('class'=>'ESGamingNewBundle:Status',
                 'property'=>'name','expanded'=>false,
                 'multiple'=>false))
@@ -46,6 +46,7 @@ class NewsController extends Controller
 
             $em = $this->getDoctrine()->getManager();
             $new->setAuthor($this->getUser());
+            $new->upload();
             $em->persist($new);
 
             $em->flush();
