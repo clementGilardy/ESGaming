@@ -17,22 +17,26 @@ class NewsController extends Controller
         return $this->render('ESGamingNewBundle:News:index.html.twig',array('news'=>$news));
     }
 
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
     public function addAction(Request $request)
     {
         $new = new News();
         $formBuilder = $this->get('form.factory')->createBuilder('form',$new);
 
         $formBuilder
-            ->add('author','entity',array(
-            'class'=>'ESGamingUserBundle:User',
-            'property'=>'nickname','expanded'=>false,
-            'multiple'=>false,'label'=>true))
             ->add('title','text')
             ->add('subtitle','text')
             ->add('text','textarea')
             ->add('mainBanner','text')
-            ->add('status','integer')
-            ->add('type','integer')
+            ->add('status','entity',array('class'=>'ESGamingNewBundle:Status',
+                'property'=>'name','expanded'=>false,
+                'multiple'=>false))
+            ->add('type','entity',array('class'=>'ESGamingNewBundle:Type',
+                'property'=>'name','expanded'=>false,
+                'multiple'=>false))
             ->add('Ajouter','submit');
 
         $form = $formBuilder->getForm();
@@ -41,7 +45,7 @@ class NewsController extends Controller
         if ($form->isValid()) {
 
             $em = $this->getDoctrine()->getManager();
-
+            $new->setAuthor($this->getUser());
             $em->persist($new);
 
             $em->flush();
@@ -55,6 +59,10 @@ class NewsController extends Controller
         return $this->render('ESGamingNewBundle:News:add.html.twig',array('form'=>$form->createView()));
     }
 
+    /**
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function newAction($id)
     {
         $repository = $this->getDoctrine()->getManager()->getRepository('ESGamingNewBundle:New');

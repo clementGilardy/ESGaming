@@ -65,14 +65,16 @@ class News
     /**
      * @var integer
      *
-     * @ORM\Column(name="status", type="integer")
+     * @ORM\OneToOne(targetEntity="ESGaming\NewBundle\Entity\Status")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $status;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="type", type="boolean")
+     * @ORM\OneToOne(targetEntity="ESGaming\NewBundle\Entity\Type")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $type;
 
