@@ -1,3 +1,18 @@
 es_gaming_new_homepage:
-    path:     /news
+    path:     /
     defaults: { _controller: ESGamingNewBundle:News:index }
+
+es_gaming_new_add:
+    path: /add
+    defaults: { _controller: ESGamingNewBundle:News:add }
+
+es_gaming_new_update:
+    path: /update
+    defaults: { _controller: ESGamingNewBundle:News:update }
+
+es_gaming_new_get:
+    path: /new/{id}
+    defaults: { _controller: ESGamingNewBundle:News:new }
+    requirements:
+        id: \d
+

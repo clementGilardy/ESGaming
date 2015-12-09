@@ -1,6 +1,8 @@
 # To get started with security, check out the documentation:
 # http://symfony.com/doc/current/book/security.html
 security:
+    encoders:
+        ESGaming\UserBundle\Entity\User: sha512
 
     role_hierarchy:
         ROLE_ADMIN:     ROLE_USER
@@ -8,12 +10,11 @@ security:
 
     # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
     providers:
-        in_memory:
-            memory:
-                users:
-                    user: { password: userpasse, roles: ['ROLE_USER'] }
-                    admin: { password: adminpass, roles: ['ROLE_ADMIN'] }
 
+        main:
+            entity:
+                class:    ESGaming\UserBundle\Entity\User
+                property: nickname
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
         dev:
@@ -23,7 +24,7 @@ security:
         main:
             pattern: ^/
             anonymous: true
-            provider: in_memory
+            provider: main
             form_login:
                 login_path: login
                 check_path: login_check
