@@ -83,6 +83,11 @@ class News
      */
     private $type;
 
+    /**
+     * @ORM\OneToMany(targetEntity="ESGaming\CommentBundle\Entity\Comment", mappedBy="id")
+     */
+    private $comments;
+
     public function __construct()
     {
         $this->postDate = new \DateTime();

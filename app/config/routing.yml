@@ -13,5 +13,7 @@ es_gaming_new:
 es_gaming_user:
     resource: "@ESGamingUserBundle/Resources/config/routing.yml"
     prefix:   /user
-
-
+    
+es_gaming_comment:
+    resource: "@ESGamingCommentBundle/Resources/config/routing.yml"
+    prefix:   /comment

@@ -1,6 +1,8 @@
 <?php
+
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
+
 class AppKernel extends Kernel
 {
     public function registerBundles()
@@ -16,6 +18,7 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new ESGaming\NewBundle\ESGamingNewBundle(),
             new ESGaming\HomeBundle\ESGamingHomeBundle(),
+            new ESGaming\CommentBundle\ESGamingCommentBundle(),
             new ESGaming\UserBundle\ESGamingUserBundle(),
             new ESGaming\GameBundle\ESGamingGameBundle(),
         );
