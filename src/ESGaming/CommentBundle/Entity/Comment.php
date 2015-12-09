@@ -35,6 +35,12 @@ class Comment
      */
     private $postDate;
 
+    /**
+     * @var news
+     * @ORM\ManyToOne(targetEntity="ESGaming\NewBundle\Entity\News", inversedBy="comments")
+     */
+    private $new;
+
 
     /**
      * Get id
