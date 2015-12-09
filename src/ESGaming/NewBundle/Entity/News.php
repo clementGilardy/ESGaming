@@ -70,7 +70,7 @@ class News
     /**
      * @var integer
      *
-     * @ORM\OneToOne(targetEntity="ESGaming\NewBundle\Entity\Status")
+     * @ORM\ManyToOne(targetEntity="ESGaming\NewBundle\Entity\Status")
      * @ORM\JoinColumn(nullable=false)
      */
     private $status;
@@ -78,7 +78,7 @@ class News
     /**
      * @var boolean
      *
-     * @ORM\OneToOne(targetEntity="ESGaming\NewBundle\Entity\Type")
+     * @ORM\ManyToOne(targetEntity="ESGaming\NewBundle\Entity\Type")
      * @ORM\JoinColumn(nullable=false)
      */
     private $type;

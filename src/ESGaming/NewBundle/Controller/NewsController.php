@@ -66,7 +66,7 @@ class NewsController extends Controller
      */
     public function newAction($id)
     {
-        $repository = $this->getDoctrine()->getManager()->getRepository('ESGamingNewBundle:New');
+        $repository = $this->getDoctrine()->getManager()->getRepository('ESGamingNewBundle:News');
         $new        = $repository->find($id);
 
         if($new === null)

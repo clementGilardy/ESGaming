@@ -13,3 +13,5 @@ es_gaming_new:
 es_gaming_user:
     resource: "@ESGamingUserBundle/Resources/config/routing.yml"
     prefix:   /user
+
+
