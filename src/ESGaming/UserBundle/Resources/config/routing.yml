@@ -13,3 +13,9 @@ user_login:
 user_logout:
     path: /logout
     defaults: { _controller: ESGamingUserBundle:User:logout }
+
+es_gaming_user_get:
+    path: /user/{id}
+    defaults: { _controller: ESGamingUserBundle:User:user }
+    requirements:
+        id: \d+

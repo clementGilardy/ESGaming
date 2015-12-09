@@ -48,6 +48,13 @@ class User implements UserInterface
     /**
      * @var string
      *
+     * @ORM\Column(name="mail", type="string", length=100)
+     */
+    private $mail;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="password", type="string", length=50)
      */
     private $password;
@@ -55,7 +62,7 @@ class User implements UserInterface
     /**
      * @var integer
      *
-     * @ORM\OneToOne(targetEntity="ESGaming\UserBundle\Entity\Question")
+     * @ORM\ManyToOne (targetEntity="ESGaming\UserBundle\Entity\Question")
      * @ORM\JoinColumn(nullable=false)
      */
     private $secretQuestion;
@@ -162,6 +169,30 @@ class User implements UserInterface
     public function getNickname()
     {
         return $this->nickname;
+    }
+
+    /**
+     * Set mail
+     *
+     * @param string $mail
+     *
+     * @return User
+     */
+    public function setMail($mail)
+    {
+        $this->mail = $mail;
+
+        return $this;
+    }
+
+    /**
+     * Get mail
+     *
+     * @return string
+     */
+    public function getMail()
+    {
+        return $this->mail;
     }
 
     /**
@@ -336,5 +367,10 @@ class User implements UserInterface
     public function eraseCredentials()
     {
         // TODO: Implement eraseCredentials() method.
+    }
+
+    public function __toString()
+    {
+        return (string) $this->id;
     }
 }
