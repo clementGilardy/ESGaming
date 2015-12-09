@@ -19,3 +19,9 @@ es_gaming_user_get:
     defaults: { _controller: ESGamingUserBundle:User:user }
     requirements:
         id: \d+
+
+es_gaming_user_all:
+    path: /users
+    defaults: { _controller: ESGamingUserBundle:User:userAll }
+
+

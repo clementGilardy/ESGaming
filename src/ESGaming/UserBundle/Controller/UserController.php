@@ -72,4 +72,18 @@ class UserController extends Controller
         return $this->render('ESGamingUserBundle:User:user.html.twig',array('user'=>$user));
     }
 
+
+    public function userAllAction()
+    {
+        $repository = $this->getDoctrine()->getManager()->getRepository('ESGamingUserBundle:User');
+        $userAll        = $repository->findAll();
+
+        if($userAll === null)
+        {
+            throw new NotFoundHttpException("Aucun utilisateur enregistré");
+        }
+
+        return $this->render('ESGamingUserBundle:User:userAll.html.twig',array('users'=>$userAll));
+    }
+
 }
