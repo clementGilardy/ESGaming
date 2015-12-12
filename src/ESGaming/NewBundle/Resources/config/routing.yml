@@ -7,12 +7,20 @@ es_gaming_new_add:
     defaults: { _controller: ESGamingNewBundle:News:add }
 
 es_gaming_new_update:
-    path: /update
-    defaults: { _controller: ESGamingNewBundle:News:update }
+    path: /update/{id}
+    defaults: { _controller: ESGamingNewBundle:News:add }
+    requirements:
+        id:\d+
 
 es_gaming_new_get:
-    path: /new/{id}
+    path: /{id}
     defaults: { _controller: ESGamingNewBundle:News:new }
+    requirements:
+        id: \d+
+
+es_gaming_new_delete:
+    path: /remove/{id}
+    defaults: { _controller: ESGamingNewBundle:News:delete}
     requirements:
         id: \d+
 
