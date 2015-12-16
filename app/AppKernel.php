@@ -21,6 +21,7 @@ class AppKernel extends Kernel
             new ESGaming\CommentBundle\ESGamingCommentBundle(),
             new ESGaming\UserBundle\ESGamingUserBundle(),
             new ESGaming\GameBundle\ESGamingGameBundle(),
+            new ESGaming\EventBundle\ESGamingEventBundle(),
         );
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
             $bundles[] = new Symfony\Bundle\DebugBundle\DebugBundle();

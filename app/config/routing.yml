@@ -1,3 +1,7 @@
+es_gaming_event:
+    resource: "@ESGamingEventBundle/Resources/config/routing.yml"
+    prefix:   /
+
 es_gaming_game:
     resource: "@ESGamingGameBundle/Resources/config/routing.yml"
     prefix:   /game
