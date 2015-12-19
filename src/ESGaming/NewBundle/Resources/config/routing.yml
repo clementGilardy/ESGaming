@@ -10,7 +10,7 @@ es_gaming_new_update:
     path: /update/{id}
     defaults: { _controller: ESGamingNewBundle:News:add }
     requirements:
-        id:\d+
+        id: \d+
 
 es_gaming_new_get:
     path: /{id}
