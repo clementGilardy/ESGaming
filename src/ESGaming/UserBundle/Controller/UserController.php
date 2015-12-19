@@ -6,6 +6,12 @@ use ESGaming\UserBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use EWZ\Bundle\RecaptchaBundle;
+use EWZ\Bundle\RecaptchaBundle\Validator\Constraints as Recaptcha;
+use Symfony\Component\Validator\Constraints\True;
+
+
+
 
 class UserController extends Controller
 {
@@ -33,6 +39,7 @@ class UserController extends Controller
                 'property'=>'question','expanded'=>false,
                 'multiple'=>false))
             ->add('secret_answer','text')
+            ->add('recaptcha', 'ewz_recaptcha')
             ->add('Ajouter','submit');
 
         $form = $formBuilder->getForm();

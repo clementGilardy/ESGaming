@@ -5,6 +5,8 @@ namespace ESGaming\UserBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\Role\Role;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints\True;
+use EWZ\Bundle\RecaptchaBundle\Validator\Constraints as Recaptcha;
 
 /**
  * User
@@ -88,6 +90,10 @@ class User implements UserInterface
      */
     private $secretAnswer;
 
+    /**
+     * @Recaptcha\IsTrue
+     */
+    public $recaptcha;
 
     /**
      * Get id
