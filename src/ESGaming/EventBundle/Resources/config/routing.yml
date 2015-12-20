@@ -1,0 +1,3 @@
+es_gaming_event_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: ESGamingEventBundle:Default:index }
