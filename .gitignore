@@ -24,8 +24,7 @@
 !bin/symfony_requirements
 /vendor/
 
-# Assets and user uploads
-/web/bundles/
+# User uploads
 /web/uploads/
 
 # PHPUnit

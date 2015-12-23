@@ -81,7 +81,7 @@ sonata_block:
             contexts: [ admin ]
 
 sonata_admin:
-    title: Hyperplanning admin area
+    title: ESGaming admin area
     security:
         handler: sonata.admin.security.handler.role
 
