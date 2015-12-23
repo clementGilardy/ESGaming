@@ -100,6 +100,15 @@ class User implements UserInterface
      *
      * @return integer
      */
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="activate", type="boolean", options={"default":true})
+     */
+    private $activate;
+
+
     public function getId()
     {
         return $this->id;
@@ -321,6 +330,31 @@ class User implements UserInterface
         return $this->secretAnswer;
     }
 
+
+    /**
+     * Set activate
+     *
+     * @param boolean $activate
+     *
+     * @return User
+     */
+    public function setActivate($activate)
+    {
+        $this->activate = $activate;
+
+        return $this;
+    }
+
+    /**
+     * Get activate
+     *
+     * @return boolean
+     */
+    public function getActivate()
+    {
+        return $this->activate;
+    }
+
     /**
      * Returns the roles granted to the user.
      *
@@ -351,7 +385,7 @@ class User implements UserInterface
      */
     public function getSalt()
     {
-        // TODO: Implement getSalt() method.
+        return $this->salt;
     }
 
     /**

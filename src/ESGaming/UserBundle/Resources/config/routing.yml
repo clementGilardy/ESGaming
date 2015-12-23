@@ -24,4 +24,11 @@ es_gaming_user_all:
     path: /users
     defaults: { _controller: ESGamingUserBundle:User:userAll }
 
+es_gaming_user_desactivate:
+    path: /desactivate/{id}
+    defaults: { _controller: ESGamingUserBundle:User:userDesactivate }
+
+es_gaming_user_activate:
+    path: /activate/{id}
+    defaults: { _controller: ESGamingUserBundle:User:userActivate }
 

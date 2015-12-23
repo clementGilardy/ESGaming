@@ -31,6 +31,14 @@ class UserController extends Controller
             ->add('nickname','text')
             ->add('mail','text')
             ->add('password','text')
+           /* ->add('password','repeated',
+                array(
+                    'type' => 'password',
+                    'invalid_message' => 'Password fields do not match',
+                    'first_options' => array('label' => 'Password'),
+                    'second_options' => array('label' => 'Repeat Password')
+                )
+            )*/
             ->add('picture','file')
             ->add('role','entity',array('class'=>'ESGamingUserBundle:Job',
                 'property'=>'title','expanded'=>false,
@@ -93,4 +101,38 @@ class UserController extends Controller
         return $this->render('ESGamingUserBundle:User:userAll.html.twig',array('users'=>$userAll));
     }
 
+    public function userDesactivateAction($id)
+    {
+        $repository = $this->getDoctrine()->getManager()->getRepository('ESGamingUserBundle:User');
+        $user = $repository->find($id);
+
+        if($user != null)
+        {
+            $user->setActivate(false);
+            $em = $this->getDoctrine()->getManager();
+            $em->flush($user);
+        }
+
+
+        return $this->render('ESGamingUserBundle:User:userDesactivate.html.twig',array('user'=>$user));
+
+    }
+
+    public function userActivateAction($id)
+    {
+        $repository = $this->getDoctrine()->getManager()->getRepository('ESGamingUserBundle:User');
+        $user = $repository->find($id);
+
+        if($user != null)
+        {
+            $user->setActivate(true);
+            $em = $this->getDoctrine()->getManager();
+            $em->flush($user);
+        }
+
+
+       return $this->render('ESGamingUserBundle:User:userActivate.html.twig',array('user'=>$user));
+
+
+    }
 }
