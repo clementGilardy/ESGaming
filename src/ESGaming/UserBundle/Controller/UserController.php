@@ -55,6 +55,7 @@ class UserController extends Controller
 
         if ($form->isValid()) {
 
+            $user->setActivate(true);
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
 
