@@ -154,7 +154,7 @@ class UserController extends Controller
             $error = $session->get(SecurityContext::AUTHENTICATION_ERROR);
             $session->remove(SecurityContext::AUTHENTICATION_ERROR);
         }
-        return $this->render('ESGamingUserBundle:Security:login.html.twig', array(
+        return $this->render('ESGamingUserBundle:User:login.html.twig', array(
             // Valeur du précédent nom d'utilisateur entré par l'internaute
             'nickname' => $session->get(SecurityContext::LAST_USERNAME),
             'error'         => $error,

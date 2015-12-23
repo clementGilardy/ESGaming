@@ -10,6 +10,9 @@ user_login:
     path: /login
     defaults: { _controller: ESGamingUserBundle:User:login }
 
+login_check:
+    pattern:   /login_check
+
 user_logout:
     path: /logout
     defaults: { _controller: ESGamingUserBundle:User:logout }
