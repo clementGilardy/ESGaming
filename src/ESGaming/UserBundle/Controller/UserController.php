@@ -31,7 +31,6 @@ class UserController extends Controller
             ->add('last_name','text')
             ->add('nickname','text')
             ->add('mail','text')
-            //->add('password','text')
             ->add('password','repeated',
                 array(
                     'type' => 'password',
@@ -58,7 +57,6 @@ class UserController extends Controller
 
             $user->setActivate(true);
             $em = $this->getDoctrine()->getManager();
-            $user->setPassword(sha1($user->getPassword()));
             $em->persist($user);
 
             $em->flush();
@@ -156,7 +154,7 @@ class UserController extends Controller
         }
         return $this->render('ESGamingUserBundle:User:login.html.twig', array(
             // Valeur du précédent nom d'utilisateur entré par l'internaute
-            'nickname' => $session->get(SecurityContext::LAST_USERNAME),
+            'last_username' => $session->get(SecurityContext::LAST_USERNAME),
             'error'         => $error,
         ));
     }
