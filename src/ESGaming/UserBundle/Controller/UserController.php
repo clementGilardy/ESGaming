@@ -9,6 +9,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use EWZ\Bundle\RecaptchaBundle;
 use EWZ\Bundle\RecaptchaBundle\Validator\Constraints as Recaptcha;
 use Symfony\Component\Validator\Constraints\True;
+use Symfony\Component\Security\Core\SecurityContext;
 
 
 
@@ -135,5 +136,27 @@ class UserController extends Controller
        return $this->render('ESGamingUserBundle:User:userActivate.html.twig',array('user'=>$user));
 
 
+    }
+
+
+    public function loginAction(Request $request)
+    {
+        // Si le visiteur est déjà identifié, on le redirige vers l'accueil
+        if ($this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            return $this->redirect($this->generateUrl('es_gaming_user_homepage:'));
+        }
+        $session = $request->getSession();
+        // On vérifie s'il y a des erreurs d'une précédente soumission du formulaire
+        if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
+            $error = $request->attributes->get(SecurityContext::AUTHENTICATION_ERROR);
+        } else {
+            $error = $session->get(SecurityContext::AUTHENTICATION_ERROR);
+            $session->remove(SecurityContext::AUTHENTICATION_ERROR);
+        }
+        return $this->render('ESGamingUserBundle:Security:login.html.twig', array(
+            // Valeur du précédent nom d'utilisateur entré par l'internaute
+            'nickname' => $session->get(SecurityContext::LAST_USERNAME),
+            'error'         => $error,
+        ));
     }
 }
