@@ -58,6 +58,7 @@ class UserController extends Controller
 
             $user->setActivate(true);
             $em = $this->getDoctrine()->getManager();
+            $user->setPassword(sha1($user->getPassword()));
             $em->persist($user);
 
             $em->flush();
