@@ -96,17 +96,17 @@ class User implements UserInterface
     public $recaptcha;
 
     /**
-     * Get id
-     *
-     * @return integer
-     */
-
-    /**
      * @var boolean
      *
      * @ORM\Column(name="activate", type="boolean", options={"default":true})
      */
     private $activate;
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
 
 
     public function getId()
