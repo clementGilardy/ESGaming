@@ -30,15 +30,15 @@ class UserController extends Controller
             ->add('last_name','text')
             ->add('nickname','text')
             ->add('mail','text')
-            ->add('password','text')
-           /* ->add('password','repeated',
+            //->add('password','text')
+            ->add('password','repeated',
                 array(
                     'type' => 'password',
                     'invalid_message' => 'Password fields do not match',
                     'first_options' => array('label' => 'Password'),
                     'second_options' => array('label' => 'Repeat Password')
                 )
-            )*/
+            )
             ->add('picture','file')
             ->add('role','entity',array('class'=>'ESGamingUserBundle:Job',
                 'property'=>'title','expanded'=>false,
