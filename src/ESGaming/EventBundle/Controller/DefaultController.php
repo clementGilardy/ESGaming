@@ -2,7 +2,10 @@
 
 namespace ESGaming\EventBundle\Controller;
 
+use ESGaming\EventBundleBundle\Entity\Event;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class DefaultController extends Controller
 {
@@ -19,7 +22,7 @@ class DefaultController extends Controller
         <form>
 
             <label>Titre : </label><input type="text" name="title"/>
-            <label>Description : </label> <textarea name="text" placeholder="Entrez votre message" . rows="8"
+            <label>Description : </label> <textarea name="text" placeholder="Entrez votre événement" . rows="8"
                                                     cols="45"></textarea>
 
             <input type="submit" value="Valider"
@@ -36,7 +39,7 @@ class DefaultController extends Controller
     }
 
 
-    public function newAction()
+    public function deleteAction()
     {
 
         $dbh = new PDO('mysql:host=localhost;dbname=esgaming', 'root', '');
@@ -53,7 +56,7 @@ class DefaultController extends Controller
 
         echo ("Titre:".$value['title'].'<br>'."id:".$value['id'].'<br>');
 
-        $id = $value['id'];
+            $id = $value['id'];
 
     }
 
@@ -63,7 +66,28 @@ class DefaultController extends Controller
 
     $rep = $dbh->prepare($request);
 
-        $event = $dbh->query($request);
+    $event = $dbh->query($request);
+
+    }
+
+    public function affichageTousAction()
+    {
+    $dbh = new PDO('mysql:host=localhost;dbname=esgaming', 'root', '');
+    $request = 'SELECT title, event FROM event';
+    $message = $dbh->query($request);
+
+        $news = $message->fetchAll(PDO::FETCH_ASSOC);
+
+
+    foreach($news as $value){
+
+        echo "Titre:    ".$value['title'].'<br>';
+        echo "Evenement:    ".$value['event'].'<br>';
+
+    }
+    ?>
+
+
 
     }
 
