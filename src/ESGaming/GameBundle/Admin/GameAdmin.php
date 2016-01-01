@@ -50,7 +50,8 @@ class GameAdmin extends Admin
         $form
             ->add('name',null,array('label' => 'Nom du Jeu'))
             ->add('editor',null,array('label' => 'Editeur'))
-            ->add('developer',null,array('label' => 'Developpeur'));
+            ->add('developer',null,array('label' => 'Developpeur'))
+            ->add('desc_long','text',array('label' => 'Description'));
     }
 
     // Fields to be shown on filter forms
