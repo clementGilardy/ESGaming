@@ -63,4 +63,3 @@ class Status
         return $this->name;
     }
 }
-

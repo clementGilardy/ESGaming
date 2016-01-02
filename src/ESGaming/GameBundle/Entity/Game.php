@@ -497,4 +497,3 @@ class Game
         return $this->postDate;
     }
 }
-
