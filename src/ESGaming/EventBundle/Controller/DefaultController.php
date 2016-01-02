@@ -70,7 +70,7 @@ class DefaultController extends Controller
 
     }
 
-    public function affichageTousAction()
+    public function displayAllAction()
     {
     $dbh = new PDO('mysql:host=localhost;dbname=esgaming', 'root', '');
     $request = 'SELECT title, event FROM event';
