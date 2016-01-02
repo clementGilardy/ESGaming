@@ -66,35 +66,35 @@ class Game
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="release_date", type="date")
+     * @ORM\Column(name="release_date", type="date", nullable=true)
      */
     private $releaseDate;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="mark", type="integer")
+     * @ORM\Column(name="mark", type="integer", nullable=true)
      */
     private $mark;
 
     /**
      * @var array
      *
-     * @ORM\Column(name="support", type="array")
+     * @ORM\Column(name="support", type="array", nullable=true)
      */
     private $support;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="download_link", type="string", length=255)
+     * @ORM\Column(name="download_link", type="string", length=255, nullable=true)
      */
     private $downloadLink;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="logo", type="string", length=255)
+     * @ORM\Column(name="logo", type="string", length=255, nullable=true)
      */
     private $logo;
 
@@ -122,7 +122,7 @@ class Game
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="post_date", type="datetime")
+     * @ORM\Column(name="post_date", type="datetime", nullable=true)
      */
     private $postDate;
 
