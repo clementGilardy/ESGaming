@@ -17,79 +17,99 @@ class DefaultController extends Controller
 
     public function addAction()
     {
-        $dbh = new PDO('mysql:host=localhost;dbname=esgaming', 'root', ''); ?>
-
-        <form>
-
-            <label>Titre : </label><input type="text" name="title"/>
-            <label>Description : </label> <textarea name="text" placeholder="Entrez votre événement" . rows="8"
-                                                    cols="45"></textarea>
-
-            <input type="submit" value="Valider"
-                   name="non"/>
-
-        </form>
-
-        <?php $request = "INSERT INTO event (title, event) VALUES (:title,:event)";
-
-        $rep = $dbh->prepare($request);
-
-        $exec = $rep->execute(array('title' => $_POST['title'], 'event' => $_POST['event']));
+        $add = array(
+            'titre'     =>"Titre de la news",
+            'date'      =>new \DateTime(),
+            'texte'   =>"Contenu de la news"
+        );
+        return $this->render('ESGamingEventBundle:Default:index.html.twig', array(
+            'add'       => $add,
+        ));
 
     }
+}
 
 
-    public function deleteAction()
-    {
+    public function deleteAction($id)
+{
+    $em = $this->container->get('doctrine')->getEntityManager();
+    $event = $em->find('ESGamingEventBundle:Default', $id);
 
-        $dbh = new PDO('mysql:host=localhost;dbname=esgaming', 'root', '');
+    $em->remove($event);
+    $em->flush();
 
-        $request = 'SELECT title, id FROM event';
 
-        $event = $dbh->query($request);
+    return new RedirectResponse($this->container->get('router')->generate('es_gaming_event_delete'));
+}
 
-        if(is_object($event)){
 
-        $news = $event->fetchAll(PDO::FETCH_ASSOC);
-    }
-        foreach($news as $value){
-
-        echo ("Titre:".$value['title'].'<br>'."id:".$value['id'].'<br>');
-
-            $id = $value['id'];
-
-    }
-
-    $dbh = new PDO('mysql:host=localhost;dbname=esgaming', 'root', '');
-
-    $request = 'DELETE FROM event WHERE id='.$_GET['id'];
-
-    $rep = $dbh->prepare($request);
-
-    $event = $dbh->query($request);
-
-    }
 
     public function displayAllAction()
+{
+    $em = $this->container->get('doctrine')->getEntityManager();
+
+    $event= $em->getRepository('ESGamingEventBundle:Default')->findAll();
+
+    return $this->container->get('templating')->renderResponse('ESGamingEventBundle:Default:index.html.twig',
+        array(
+            'event' => $event
+        ));
+}
+
+    public function editAction($id = null)
+{
+    $message='';
+    $em = $this->container->get('doctrine')->getEntityManager();
+
+    if (isset($id))
     {
-    $dbh = new PDO('mysql:host=localhost;dbname=esgaming', 'root', '');
-    $request = 'SELECT title, event FROM event';
-    $message = $dbh->query($request);
 
-        $news = $message->fetchAll(PDO::FETCH_ASSOC);
+        $event = $em->find('ESGamingEventBundle:Default', $id);
 
-
-    foreach($news as $value){
-
-        echo "Titre:    ".$value['title'].'<br>';
-        echo "Evenement:    ".$value['event'].'<br>';
-
+        if (!$event)
+        {
+            $message='Aucun evenement trouvé';
+        }
     }
-    ?>
-
-
-
+    else
+    {
+        $event = new event();
     }
+
+    $form = $this->container->get('form.factory')->create(new EventForm(), $event);
+
+    $request = $this->container->get('request');
+
+    if ($request->getMethod() == 'POST')
+    {
+        $form->bindRequest($request);
+
+        if ($form->isValid())
+        {
+            $em->persist($event);
+            $em->flush();
+            if (isset($id))
+            {
+                $message='Evenement modifié avec succès !';
+            }
+            else
+            {
+                $message='Evenement ajouté avec succès !';
+            }
+        }
+    }
+
+    return $this->container->get('templating')->renderResponse(
+        'ESGamingEventBundle:Default:index.html.twig',
+        array(
+            'form' => $form->createView(),
+            'message' => $message,
+        ));
+}
+
+
+
+
 
 
 }
