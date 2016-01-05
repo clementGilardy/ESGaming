@@ -10,6 +10,9 @@ use EWZ\Bundle\RecaptchaBundle;
 use EWZ\Bundle\RecaptchaBundle\Validator\Constraints as Recaptcha;
 use Symfony\Component\Validator\Constraints\True;
 use Symfony\Component\Security\Core\SecurityContext;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 
 
@@ -24,14 +27,14 @@ class UserController extends Controller
     public function registerAction(Request $request)
     {
         $user = new User();
-        $formBuilder = $this->get('form.factory')->createBuilder('form',$user);
+        $formBuilder = $this->get('form.factory')->createBuilder('form', $user);
 
         $formBuilder
-            ->add('first_name','text')
-            ->add('last_name','text')
-            ->add('nickname','text')
-            ->add('mail','text')
-            ->add('password','repeated',
+            ->add('first_name', 'text')
+            ->add('last_name', 'text')
+            ->add('nickname', 'text')
+            ->add('mail', 'text')
+            ->add('password', 'repeated',
                 array(
                     'type' => 'password',
                     'invalid_message' => 'Password fields do not match',
@@ -39,16 +42,16 @@ class UserController extends Controller
                     'second_options' => array('label' => 'Repeat Password')
                 )
             )
-            ->add('picture','file')
-            ->add('role','entity',array('class'=>'ESGamingUserBundle:Job',
-                'property'=>'title','expanded'=>false,
-                'multiple'=>false))
-            ->add('secret_question','entity',array('class'=>'ESGamingUserBundle:Question',
-                'property'=>'question','expanded'=>false,
-                'multiple'=>false))
-            ->add('secret_answer','text')
+            ->add('picture', 'file')
+            ->add('role', 'entity', array('class' => 'ESGamingUserBundle:Job',
+                'property' => 'title', 'expanded' => false,
+                'multiple' => false))
+            ->add('secret_question', 'entity', array('class' => 'ESGamingUserBundle:Question',
+                'property' => 'question', 'expanded' => false,
+                'multiple' => false))
+            ->add('secret_answer', 'text')
             ->add('recaptcha', 'ewz_recaptcha')
-            ->add('Ajouter','submit');
+            ->add('Ajouter', 'submit');
 
         $form = $formBuilder->getForm();
         $form->handleRequest($request);
@@ -67,7 +70,7 @@ class UserController extends Controller
 
         }
 
-        return $this->render('ESGamingUserBundle:User:add.html.twig',array('form'=>$form->createView()));
+        return $this->render('ESGamingUserBundle:User:add.html.twig', array('form' => $form->createView()));
     }
 
 
@@ -78,28 +81,26 @@ class UserController extends Controller
     public function userAction($id)
     {
         $repository = $this->getDoctrine()->getManager()->getRepository('ESGamingUserBundle:User');
-        $user        = $repository->find($id);
+        $user = $repository->find($id);
 
-        if($user === null)
-        {
+        if ($user === null) {
             throw new NotFoundHttpException("L'user n°$id n'existe pas");
         }
 
-        return $this->render('ESGamingUserBundle:User:user.html.twig',array('user'=>$user));
+        return $this->render('ESGamingUserBundle:User:user.html.twig', array('user' => $user));
     }
 
 
     public function userAllAction()
     {
         $repository = $this->getDoctrine()->getManager()->getRepository('ESGamingUserBundle:User');
-        $userAll        = $repository->findAll();
+        $userAll = $repository->findAll();
 
-        if($userAll === null)
-        {
+        if ($userAll === null) {
             throw new NotFoundHttpException("Aucun utilisateur enregistré");
         }
 
-        return $this->render('ESGamingUserBundle:User:userAll.html.twig',array('users'=>$userAll));
+        return $this->render('ESGamingUserBundle:User:userAll.html.twig', array('users' => $userAll));
     }
 
     public function userDesactivateAction($id)
@@ -107,15 +108,14 @@ class UserController extends Controller
         $repository = $this->getDoctrine()->getManager()->getRepository('ESGamingUserBundle:User');
         $user = $repository->find($id);
 
-        if($user != null)
-        {
+        if ($user != null) {
             $user->setActivate(false);
             $em = $this->getDoctrine()->getManager();
             $em->flush($user);
         }
 
 
-        return $this->render('ESGamingUserBundle:User:userDesactivate.html.twig',array('user'=>$user));
+        return $this->render('ESGamingUserBundle:User:userDesactivate.html.twig', array('user' => $user));
 
     }
 
@@ -124,21 +124,20 @@ class UserController extends Controller
         $repository = $this->getDoctrine()->getManager()->getRepository('ESGamingUserBundle:User');
         $user = $repository->find($id);
 
-        if($user != null)
-        {
+        if ($user != null) {
             $user->setActivate(true);
             $em = $this->getDoctrine()->getManager();
             $em->flush($user);
         }
 
 
-       return $this->render('ESGamingUserBundle:User:userActivate.html.twig',array('user'=>$user));
+        return $this->render('ESGamingUserBundle:User:userActivate.html.twig', array('user' => $user));
 
 
     }
 
 
-    public function loginAction(Request $request)
+    /*public function loginAction(Request $request)
     {
         // Si le visiteur est déjà identifié, on le redirige vers l'accueil
         if ($this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
@@ -157,5 +156,53 @@ class UserController extends Controller
             'last_username' => $session->get(SecurityContext::LAST_USERNAME),
             'error'         => $error,
         ));
+    }*/
+
+
+    /**
+     * @Method({"GET"})
+     * @Route("/login", name="login")
+     * @Template()
+     */
+    public function loginAction(Request $request)
+    {
+        // Si le visiteur est déjà identifié, on le redirige vers l'accueil
+        if ($this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            return $this->redirect($this->generateUrl('es_gaming_user_homepage:'));
+        }
+
+        $request = $this->getRequest();
+        $session = $request->getSession();
+        // On vérifie s'il y a des erreurs d'une précédente soumission du formulaire
+        if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
+            $error = $request->attributes->get(SecurityContext::AUTHENTICATION_ERROR);
+        } else {
+            $error = $session->get(SecurityContext::AUTHENTICATION_ERROR);
+            $session->remove(SecurityContext::AUTHENTICATION_ERROR);
+        }
+
+        return $this->render('ESGamingUserBundle:User:login.html.twig', array(
+            // Valeur du précédent nom d'utilisateur entré par l'internaute
+            'last_username' => $session->get(SecurityContext::LAST_USERNAME),
+            'error' => $error,
+        ));
+    }
+
+    /**
+     * @Method({"POST"})
+     * @Route("/login_check", name="login_check")
+     */
+    public function check()
+    {
+        throw new \RuntimeException('You must configure the check path to be handled by the firewall using form_login in your security firewall configuration.');
+    }
+
+    /**
+     * @Method({"GET"})
+     * @Route("/logout", name="logout")
+     */
+    public function logout()
+    {
+        throw new \RuntimeException('You must activate the logout in your security firewall configuration.');
     }
 }

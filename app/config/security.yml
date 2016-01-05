@@ -2,8 +2,11 @@
 # http://symfony.com/doc/current/book/security.html
 security:
     encoders:
-        ESGaming\UserBundle\Entity\User: plaintext
-        Symfony\Component\Security\Core\User\User: plaintext
+        ESGaming\UserBundle\Entity\User:
+            algorithm: plaintext
+         #   iterations: 9616
+        #    encode_as_base64: true
+       # Symfony\Component\Security\Core\User\User: plaintext
 
     role_hierarchy:
         ROLE_ADMIN:     ROLE_USER
@@ -15,6 +18,8 @@ security:
             entity:
                 class:    ESGaming\UserBundle\Entity\User
                 property: nickname
+
+
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
         dev:
@@ -29,8 +34,9 @@ security:
                 login_path: login
                 check_path: login_check
             logout:
-                path: logout
+                path: /logout
                 target: /
+
             # activate different ways to authenticate
 
             # http_basic: ~
@@ -38,3 +44,9 @@ security:
 
             # form_login: ~
             # http://symfony.com/doc/current/cookbook/security/form_login_setup.html
+
+
+    access_control:
+        - { path: ^/private/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/private, roles: ROLE_ADMIN }
+        - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }

@@ -2,21 +2,25 @@
         {{ error.message }}
 {% endif %}
 
-<form action="{{ path('login_check') }}" method="post">
-    <div>
-        <label for="nickname">Login</label>
-        <div>
-            <input type="text" id="nickname" placeholder="Login" name="_nickname" value="{{ last_username }}" />
-        </div>
+<form action="{{ path("login_check", {}) }}" method="POST" >
+    <div class="form-group">
+        <label for="inputUsernameEmail">Username</label>
+        <input type="text" required="required" class="form-control" value="{{ last_username }}" name="_username" id="username">
     </div>
 
-    <div>
-        <label for="password">Password</label>
-        <div>
-            <input type="password" id="password" placeholder="Password" name="_password" />
-        </div>
+    <div class="form-group">
+        <label for="inputPassword">Password</label>
+        <input type="password" class="form-control" name="_password" required="required" id="password">
     </div>
-    <div>
-        <input type="submit" value="Connexion" />
+
+    <div class="checkbox pull-left">
+        <label>
+            <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+            <label for="remember_me">Remember me</label>
+        </label>
     </div>
+
+    <button type="submit" name="login" class="pull-right btn btn btn-primary">
+        Log In
+    </button>
 </form>

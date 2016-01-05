@@ -57,7 +57,7 @@ class User implements UserInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="password", type="string", length=50)
+     * @ORM\Column(name="password", type="string", length=128)
      */
     private $password;
 
@@ -107,6 +107,11 @@ class User implements UserInterface
      *
      * @return integer
      */
+
+    /**
+     * @ORM\Column(type="string", length=32)
+     */
+    private $salt;
 
 
     public function getId()
@@ -355,6 +360,12 @@ class User implements UserInterface
         return $this->activate;
     }
 
+    /*public function __construct()
+    {
+        $this->activate = true;
+        $this->salt = plaintext(uniqid(null, true));
+    }*/
+
     /**
      * Returns the roles granted to the user.
      *
@@ -373,7 +384,8 @@ class User implements UserInterface
      */
     public function getRoles()
     {
-        // TODO: Implement getRoles() method.
+        return array('ROLE_USER');
+
     }
 
     /**
