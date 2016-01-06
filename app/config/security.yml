@@ -3,9 +3,9 @@
 security:
     encoders:
         ESGaming\UserBundle\Entity\User:
-            algorithm: plaintext
-         #   iterations: 9616
-        #    encode_as_base64: true
+            algorithm: sha1
+            iterations: 9616
+            encode_as_base64: true
        # Symfony\Component\Security\Core\User\User: plaintext
 
     role_hierarchy:

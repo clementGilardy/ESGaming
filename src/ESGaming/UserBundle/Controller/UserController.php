@@ -21,9 +21,9 @@ use ESGaming\UserBundle\Form\Model\ChangePassword;
 
 class UserController extends Controller
 {
-    public function indexAction($name)
+    public function indexAction($user)
     {
-        return $this->render('ESGamingUserBundle:User:index.html.twig', array('name' => $name));
+        return $this->render('ESGamingUserBundle:User:index.html.twig', array('user' => $user));
     }
 
     public function registerAction(Request $request)
@@ -37,7 +37,7 @@ class UserController extends Controller
             ))
             ->add('last_name', 'text')
             ->add('nickname', 'text')
-            ->add('birth_date', 'date', array(
+            ->add('birthDate', 'date', array(
                 'label' => 'Date de Naissance',
                 'format' => 'dd MMMM yyyy',
                 'years' => range(date('Y')-100,date('Y')-10)))
@@ -50,10 +50,6 @@ class UserController extends Controller
                     'second_options' => array('label' => 'Repeat Password')
                 )
             )
-
-            ->add('birth_date', 'date', array(
-                'label' => 'Date de Naissance',
-                'format' => 'dd MMMM yyyy'))
             ->add('picture', 'file')
             ->add('secret_question', 'entity', array('class' => 'ESGamingUserBundle:Question',
                 'property' => 'question', 'expanded' => false,
@@ -82,7 +78,7 @@ class UserController extends Controller
 
             $request->getSession()->getFlashBag()->add('notice', 'Utilisateur bien enregistré.');
 
-            return $this->redirect($this->generateUrl('es_gaming_user_homepage', array('id' => $user->getId())));
+            return $this->redirect($this->generateUrl('es_gaming_user_get', array('id' => $user->getId())));
 
         }
 
@@ -225,14 +221,14 @@ class UserController extends Controller
                 'format' => 'dd MMMM yyyy',
                 'years' => range(date('Y')-100,date('Y')-10) ))
             ->add('mail', 'text')
-            ->add('password', 'repeated',
+           /* ->add('password', 'repeated',
                 array(
                     'type' => 'password',
                     'invalid_message' => 'Password fields do not match',
                     'first_options' => array('label' => 'Mot de passe'),
                     'second_options' => array('label' => 'Repetez votre mot de passe')
                 )
-            )
+            )*/
           //  ->add('picture', 'file')
             ->add('secret_question', 'entity', array('class' => 'ESGamingUserBundle:Question',
                 'property' => 'question', 'expanded' => false,
