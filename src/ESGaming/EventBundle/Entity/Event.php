@@ -22,16 +22,13 @@ class Event
     private $id;
 
     /**
-     * @var string
      * @ORM\ManyToOne(targetEntity="ESGaming\UserBundle\Entity\User")
      * @ORM\JoinColumn(nullable=true)
      */
     private $user;
 
     /**
-     * @var string
      * @ORM\OneToOne(targetEntity="ESGaming\GameBundle\Entity\Game")
-     * @ORM\JoinColumn(nullable=false)
      */
     private $game;
 

@@ -2,7 +2,7 @@
 
 namespace ESGaming\EventBundle\Controller;
 
-use ESGaming\EventBundleBundle\Entity\Event;
+use ESGaming\EventBundle\Entity\Event;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -11,7 +11,7 @@ class EventController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('ESGamingEventBundle:Default:index.html.twig');
+        return $this->render('ESGamingEventBundle:Event:index.html.twig');
     }
 
 
@@ -22,7 +22,7 @@ class EventController extends Controller
             'date'      =>new \DateTime(),
             'texte'   =>"Contenu de la news"
         );
-        return $this->render('ESGamingEventBundle:Default:index.html.twig', array(
+        return $this->render('ESGamingEventBundle:Event:index.html.twig', array(
             'add'       => $add,
         ));
 
@@ -36,7 +36,9 @@ class EventController extends Controller
 
         $formBuilder
             ->add('event','text')
-            ->add('game','text')
+            ->add('game','entity',array('class'=>'ESGamingGameBundle:Game',
+                'property'=>'name','expanded'=>false,
+                'multiple'=>false))
             ->add('text','textarea')
             ->add('Ajouter','submit');
 
@@ -62,14 +64,27 @@ class EventController extends Controller
 
     public function deleteAction($id)
     {
-        $em = $this->container->get('doctrine')->getEntityManager();
+       /** $em = $this->container->get('doctrine')->getEntityManager();
         $event = $em->find('ESGamingEventBundle:Event', $id);
 
         $em->remove($event);
         $em->flush();
 
 
-        return new RedirectResponse($this->container->get('router')->generate('es_gaming_event_delete'));
+        return new RedirectResponse($this->container->get('router')->generate('es_gaming_event_delete'));**/
+
+        $em = $this->getDoctrine()->getEntityManager();
+        $guest = $em->getRepository('ESGamingEventBundle:Event')->find($id);
+
+        if (!$guest) {
+            throw $this->createNotFoundException('Rien trouvé pour cet id '.$id);
+        }
+
+        $em->remove($guest);
+        $em->flush();
+
+        return $this->redirect($this->generateUrl('ESGamingEventBundle:Event:delete.html.twig'));
+
     }
 
 
@@ -78,9 +93,9 @@ class EventController extends Controller
 {
     $em = $this->container->get('doctrine')->getEntityManager();
 
-    $event= $em->getRepository('ESGamingEventBundle:Default')->findAll();
+    $event= $em->getRepository('ESGamingEventBundle:Event')->findAll();
 
-    return $this->container->get('templating')->renderResponse('ESGamingEventBundle:Default:index.html.twig',
+    return $this->container->get('templating')->renderResponse('ESGamingEventBundle:Event:index.html.twig',
         array(
             'event' => $event
         ));
@@ -94,7 +109,7 @@ class EventController extends Controller
     if (isset($id))
     {
 
-        $event = $em->find('ESGamingEventBundle:Default', $id);
+        $event = $em->find('ESGamingEventBundle:Event', $id);
 
         if (!$event)
         {
@@ -130,7 +145,7 @@ class EventController extends Controller
     }
 
     return $this->container->get('templating')->renderResponse(
-        'ESGamingEventBundle:Default:index.html.twig',
+        'ESGamingEventBundle:Event:index.html.twig',
         array(
             'form' => $form->createView(),
             'message' => $message,
