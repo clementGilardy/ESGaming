@@ -50,6 +50,10 @@ class UserController extends Controller
                     'second_options' => array('label' => 'Repeat Password')
                 )
             )
+
+            ->add('birth_date', 'date', array(
+                'label' => 'Date de Naissance',
+                'format' => 'dd MMMM yyyy'))
             ->add('picture', 'file')
             ->add('secret_question', 'entity', array('class' => 'ESGamingUserBundle:Question',
                 'property' => 'question', 'expanded' => false,
