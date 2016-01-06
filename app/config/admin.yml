@@ -8,12 +8,34 @@ services:
         public: false
 
     sonata.admin.game:
-        class: ESGaming\GameBundle\Admin\GameAdmin
+        class: ESGaming\AdminBundle\Admin\GameAdmin
         tags:
             - { name: sonata.admin, manager_type: orm, group: "Content", label: "Game" }
         arguments:
             - ~
             - ESGaming\GameBundle\Entity\Game
+            - ~
+        calls:
+            - [ setEntityManager, [@doctrine.orm.entity_manager]]
+
+    sonata.admin.new:
+        class: ESGaming\AdminBundle\Admin\NewAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "New" }
+        arguments:
+            - ~
+            - ESGaming\NewBundle\Entity\News
+            - ~
+        calls:
+            - [ setEntityManager, [@doctrine.orm.entity_manager]]
+
+    sonata.admin.user:
+        class: ESGaming\AdminBundle\Admin\UserAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "User" }
+        arguments:
+            - ~
+            - ESGaming\UserBundle\Entity\User
             - ~
         calls:
             - [ setEntityManager, [@doctrine.orm.entity_manager]]

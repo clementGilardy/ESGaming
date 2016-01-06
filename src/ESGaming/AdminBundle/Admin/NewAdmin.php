@@ -1,6 +1,6 @@
 <?php
 
-namespace ESGaming\GameBundle\Admin;
+namespace ESGaming\AdminBundle\Admin;
 
 use Doctrine\ORM\EntityManager;
 use Sonata\AdminBundle\Admin\Admin;
@@ -10,7 +10,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 
 
-class GameAdmin extends Admin
+class NewAdmin extends Admin
 {
     /**
      * @var EntityManager
@@ -34,11 +34,11 @@ class GameAdmin extends Admin
         $actions['edit'] = array();
 
         $list
-            ->addIdentifier('id',null,array('label' => 'Identifiant jeu'))
-            ->add('name',null,array('label' => 'Nom du jeu'))
-            ->add('editor',null,array('label' => 'Editeur'))
-            ->add('developer',null,array('label' => 'Developpeur'))
-            ->add('type',null,array('label' => 'Type'));
+            ->addIdentifier('id',null,array('label' => 'Identifiant news'))
+            ->add('title',null,array('label' => 'Titre'))
+            ->add('subtitle',null,array('label' => 'Sous-Titre'))
+            ->add('text',null,array('label' => 'Contenu'))
+            ->add('main_banner','file',array('label' => 'Image'));
 
         $list->add('_action', 'actions', array(
             'actions' => $actions
@@ -48,28 +48,14 @@ class GameAdmin extends Admin
     protected function configureFormFields(FormMapper $form)
     {
         $form
-            ->add('name',null,array('label' => 'Nom du Jeu'))
-            ->add('editor',null,array('label' => 'Editeur'))
-            ->add('developer',null,array('label' => 'Developpeur'))
-            ->add('type',null,array('label' => 'Type'))
-            ->add('desc_short','text',array('label' => 'Description courte'))
-            ->add('desc_long','text',array('label' => 'Description longue'))
-            ->add('release_date','sonata_type_date_picker',array('label' => 'Date de Sortie',
-                                                                    'format' => 'yyyy-MM-dd'))
-            ->add('mark',null,array('label' => 'Note'))
-            ->add('support',null,array('label' => 'Support'))
-            ->add('download_link','text',array('label' => 'Lien de téléchargement'))
-            ->add('logo',null,array('label' => 'Logo'))
-            ->add('classification',null,array('label' => 'Classification'))
-            ->add('banner',null,array('label' => 'Banniere'))
-            ->add('trailer',null,array('label' => 'Trailer'));
+            ->add('title',null,array('label' => 'Nom du Jeu'));
     }
 
     // Fields to be shown on filter forms
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('name');
+            ->add('title');
     }
 
 
