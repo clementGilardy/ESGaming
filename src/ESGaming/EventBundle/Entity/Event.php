@@ -23,20 +23,28 @@ class Event
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="user", type="string", length=255)
+     * @ORM\ManyToOne(targetEntity="ESGaming\UserBundle\Entity\User")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $user;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="game", type="string", length=255)
+     * @ORM\OneToOne(targetEntity="ESGaming\GameBundle\Entity\Game")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $game;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="text", type="text")
+     */
+    private $text;
+
+
+    /**
+     *@var string
      *
      * @ORM\Column(name="event", type="string", length=255)
      */
@@ -44,10 +52,15 @@ class Event
 
 
     /**
+     *
+     */
+
+    /**
      * Get id
      *
      * @return integer
      */
+
     public function getId()
     {
         return $this->id;
@@ -123,6 +136,30 @@ class Event
     public function getEvent()
     {
         return $this->event;
+    }
+
+    /**
+     * Set text
+     *
+     * @param string $text
+     *
+     * @return News
+     */
+    public function setText($text)
+    {
+        $this->text = $text;
+
+        return $this;
+    }
+
+    /**
+     * Get text
+     *
+     * @return string
+     */
+    public function getText()
+    {
+        return $this->text;
     }
 }
 

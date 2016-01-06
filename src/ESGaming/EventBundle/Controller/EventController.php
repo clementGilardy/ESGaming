@@ -7,15 +7,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class DefaultController extends Controller
+class EventController extends Controller
 {
-    public function indexAction($name)
+    public function indexAction()
     {
-        return $this->render('ESGamingEventBundle:Default:index.html.twig', array('name' => $name));
+        return $this->render('ESGamingEventBundle:Default:index.html.twig');
     }
 
 
-    public function addAction()
+    /**public function addAction()
     {
         $add = array(
             'titre'     =>"Titre de la news",
@@ -27,20 +27,50 @@ class DefaultController extends Controller
         ));
 
     }
-}
+}**/
+
+    public function addAction(Request $request)
+    {
+        $event = new Event();
+        $formBuilder = $this->get('form.factory')->createBuilder('form',$event);
+
+        $formBuilder
+            ->add('event','text')
+            ->add('game','text')
+            ->add('text','textarea')
+            ->add('Ajouter','submit');
+
+        $form = $formBuilder->getForm();
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($event);
+
+            $em->flush();
+
+            $request->getSession()->getFlashBag()->add('notice', 'Event bien enregistrée.');
+
+            return $this->redirect($this->generateUrl('es_gaming_event_get', array('id' => $event->getId())));
+
+        }
+
+        return $this->render('ESGamingEventBundle:Event:add.html.twig',array('form'=>$form->createView()));
+    }
 
 
     public function deleteAction($id)
-{
-    $em = $this->container->get('doctrine')->getEntityManager();
-    $event = $em->find('ESGamingEventBundle:Default', $id);
+    {
+        $em = $this->container->get('doctrine')->getEntityManager();
+        $event = $em->find('ESGamingEventBundle:Event', $id);
 
-    $em->remove($event);
-    $em->flush();
+        $em->remove($event);
+        $em->flush();
 
 
-    return new RedirectResponse($this->container->get('router')->generate('es_gaming_event_delete'));
-}
+        return new RedirectResponse($this->container->get('router')->generate('es_gaming_event_delete'));
+    }
 
 
 
@@ -106,11 +136,6 @@ class DefaultController extends Controller
             'message' => $message,
         ));
 }
-
-
-
-
-
 
 }
 ?>

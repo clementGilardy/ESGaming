@@ -1,3 +1,23 @@
 es_gaming_event_homepage:
-    path:     /hello/{name}
-    defaults: { _controller: ESGamingEventBundle:Default:index }
+    path:     /
+    defaults: { _controller: ESGamingEventBundle:Event:index }
+
+
+es_gaming_event_add:
+    path:     /add
+    defaults: { _controller: ESGamingEventBundle:Event:add }
+
+
+es_gaming_event_delete:
+    path:     /delete
+    defaults: { _controller: ESGamingEventBundle:Event:delete }
+
+
+es_gaming_event_displayAll:
+    path:     /displayAll
+    defaults: { _controller: ESGamingEventBundle:Event:displayAll }
+
+
+es_gaming_event_edit:
+    path:     /edit
+    defaults: { _controller: ESGamingEventBundle:Event:edit }
