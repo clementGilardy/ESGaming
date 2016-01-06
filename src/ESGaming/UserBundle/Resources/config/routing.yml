@@ -2,7 +2,7 @@ es_gaming_user_homepage:
     path:     /hello/{name}
     defaults: { _controller: ESGamingUserBundle:User:index }
 
-user_register:
+es_gaming_user_register:
     path: /register
     defaults: { _controller: ESGamingUserBundle:User:register }
 
@@ -24,3 +24,14 @@ es_gaming_user_activate:
     path: /activate/{id}
     defaults: { _controller: ESGamingUserBundle:User:userActivate }
 
+es_gaming_user_profile:
+    path: /profile
+    defaults: { _controller: ESGamingUserBundle:User:profile }
+
+es_gaming_user_change_password:
+    path: /profile/change-password
+    defaults: { _controller: ESGamingUserBundle:User:changePassword }
+
+es_gaming_user_edit_profile:
+    path: /profile/edit
+    defaults: { _controller: ESGamingUserBundle:User:editProfile }

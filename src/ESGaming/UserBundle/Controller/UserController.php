@@ -13,6 +13,7 @@ use Symfony\Component\Security\Core\SecurityContext;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use ESGaming\UserBundle\Form\Model\ChangePassword;
 
 
 
@@ -30,7 +31,9 @@ class UserController extends Controller
         $formBuilder = $this->get('form.factory')->createBuilder('form', $user);
 
         $formBuilder
-            ->add('first_name', 'text')
+            ->add('first_name', 'text', array(
+                'label' => 'Prenom'
+            ))
             ->add('last_name', 'text')
             ->add('nickname', 'text')
             ->add('mail', 'text')
@@ -43,9 +46,6 @@ class UserController extends Controller
                 )
             )
             ->add('picture', 'file')
-            ->add('role', 'entity', array('class' => 'ESGamingUserBundle:Job',
-                'property' => 'title', 'expanded' => false,
-                'multiple' => false))
             ->add('secret_question', 'entity', array('class' => 'ESGamingUserBundle:Question',
                 'property' => 'question', 'expanded' => false,
                 'multiple' => false))
@@ -58,6 +58,13 @@ class UserController extends Controller
 
         if ($form->isValid()) {
 
+            $factory = $this->get('security.encoder_factory');
+            $encoder = $factory->getEncoder($user);
+            $password = $encoder->encodePassword($form->get('password')->getData(), $user->getSalt());
+            $user->setPassword($password);
+
+            $user->setRole(2);
+
             $user->setActivate(true);
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
@@ -66,7 +73,7 @@ class UserController extends Controller
 
             $request->getSession()->getFlashBag()->add('notice', 'Utilisateur bien enregistré.');
 
-            return $this->redirect($this->generateUrl('es_gaming_user_get', array('id' => $user->getId())));
+            return $this->redirect($this->generateUrl('es_gaming_user_homepage', array('id' => $user->getId())));
 
         }
 
@@ -137,28 +144,6 @@ class UserController extends Controller
     }
 
 
-    /*public function loginAction(Request $request)
-    {
-        // Si le visiteur est déjà identifié, on le redirige vers l'accueil
-        if ($this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
-            return $this->redirect($this->generateUrl('es_gaming_user_homepage:'));
-        }
-        $session = $request->getSession();
-        // On vérifie s'il y a des erreurs d'une précédente soumission du formulaire
-        if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
-            $error = $request->attributes->get(SecurityContext::AUTHENTICATION_ERROR);
-        } else {
-            $error = $session->get(SecurityContext::AUTHENTICATION_ERROR);
-            $session->remove(SecurityContext::AUTHENTICATION_ERROR);
-        }
-        return $this->render('ESGamingUserBundle:User:login.html.twig', array(
-            // Valeur du précédent nom d'utilisateur entré par l'internaute
-            'last_username' => $session->get(SecurityContext::LAST_USERNAME),
-            'error'         => $error,
-        ));
-    }*/
-
-
     /**
      * @Method({"GET"})
      * @Route("/login", name="login")
@@ -205,4 +190,111 @@ class UserController extends Controller
     {
         throw new \RuntimeException('You must activate the logout in your security firewall configuration.');
     }
+
+
+    public function editProfileAction(Request $request)
+    {
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        $formBuilder = $this->get('form.factory')->createBuilder('form', $user);
+
+        $formBuilder
+            ->add('first_name', 'text', array(
+                'label' => 'Prenom'
+            ))
+            ->add('last_name', 'text', array(
+                'label' => 'Nom'))
+            ->add('nickname', 'text', array(
+                'label' => 'Pseudo'))
+            ->add('lol_nickname', 'text', array(
+                'label' => 'Pseudo League Of Legends'))
+            ->add('steam_nickname', 'text', array(
+                'label' => 'Pseudo Steam'))
+            ->add('origin_nickname', 'text', array(
+                'label' => 'Pseudo Origin'))
+            ->add('birth_date', 'date', array(
+                'label' => 'Date de Naissance',
+                'format' => 'dd MMMM yyyy'))
+            ->add('mail', 'text')
+            ->add('password', 'repeated',
+                array(
+                    'type' => 'password',
+                    'invalid_message' => 'Password fields do not match',
+                    'first_options' => array('label' => 'Mot de passe'),
+                    'second_options' => array('label' => 'Repetez votre mot de passe')
+                )
+            )
+          //  ->add('picture', 'file')
+            ->add('secret_question', 'entity', array('class' => 'ESGamingUserBundle:Question',
+                'property' => 'question', 'expanded' => false,
+                'multiple' => false))
+            ->add('secret_answer', 'text')
+            ->add('Modifier', 'submit');
+
+        $form = $formBuilder->getForm();
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+
+            $em->flush();
+
+            $request->getSession()->getFlashBag()->add('notice', 'Profil modifie avec succes.');
+
+            return $this->redirect($this->generateUrl('es_gaming_user_profile', array('id' => $user->getId())));
+
+        }
+
+        return $this->render('ESGamingUserBundle:User:editProfile.html.twig', array('form' => $form->createView()));
+    }
+
+    public function changePasswordAction(Request $request)
+    {
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+
+        $changePassword = new changePassword();
+        $formBuilder = $this->get('form.factory')->createBuilder('form', $changePassword);
+
+        $formBuilder
+            ->add('oldPassword', 'password')
+            ->add('newPassword', 'repeated',
+                array(
+                    'type' => 'password',
+                    'invalid_message' => 'Password fields do not match',
+                    'first_options' => array('label' => 'Mot de passe'),
+                    'second_options' => array('label' => 'Repetez votre mot de passe')
+                )
+            )
+            ->add('Modifier le mot de passe', 'submit');
+
+        $form = $formBuilder->getForm();
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            if($form->getOldPassword() == $user->getPassword()){
+                echo 'oui';
+            }
+            /*$em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+
+            $em->flush();
+
+            $request->getSession()->getFlashBag()->add('notice', 'Profil modifie avec succes.');
+
+            return $this->redirect($this->generateUrl('es_gaming_user_change_password', array('id' => $user->getId())));
+            */
+        }
+
+        return $this->render('ESGamingUserBundle:User:changePassword.html.twig', array('form' => $form->createView()));
+    }
+
+
+    public function profileAction(Request $request)
+    {
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+
+        return $this->render('ESGamingUserBundle:User:profile.html.twig', array('user' => $user));
+    }
+
 }
