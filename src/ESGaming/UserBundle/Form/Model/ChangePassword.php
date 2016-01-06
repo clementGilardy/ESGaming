@@ -18,7 +18,7 @@ class ChangePassword
      *     message = "Wrong value for your current password"
      * )
      */
-    protected $oldPassword;
+    public $oldPassword;
 
     /**
      * @Assert\Length(
@@ -26,5 +26,5 @@ class ChangePassword
      *     minMessage = "Password should by at least 6 chars long"
      * )
      */
-    protected $newPassword;
+    public $newPassword;
 }

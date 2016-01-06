@@ -13,6 +13,7 @@ use Symfony\Component\Security\Core\SecurityContext;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use ESGaming\UserBundle\Form\ChangePasswordType;
 use ESGaming\UserBundle\Form\Model\ChangePassword;
 
 
@@ -36,6 +37,10 @@ class UserController extends Controller
             ))
             ->add('last_name', 'text')
             ->add('nickname', 'text')
+            ->add('birth_date', 'date', array(
+                'label' => 'Date de Naissance',
+                'format' => 'dd MMMM yyyy',
+                'years' => range(date('Y')-100,date('Y')-10)))
             ->add('mail', 'text')
             ->add('password', 'repeated',
                 array(
@@ -213,7 +218,8 @@ class UserController extends Controller
                 'label' => 'Pseudo Origin'))
             ->add('birth_date', 'date', array(
                 'label' => 'Date de Naissance',
-                'format' => 'dd MMMM yyyy'))
+                'format' => 'dd MMMM yyyy',
+                'years' => range(date('Y')-100,date('Y')-10) ))
             ->add('mail', 'text')
             ->add('password', 'repeated',
                 array(
@@ -253,10 +259,12 @@ class UserController extends Controller
     {
         $user = $this->get('security.token_storage')->getToken()->getUser();
 
-        $changePassword = new changePassword();
-        $formBuilder = $this->get('form.factory')->createBuilder('form', $changePassword);
+        $changePasswordModel = new ChangePassword();
+        $form = $this->createForm(new ChangePasswordType(), $changePasswordModel);
 
-        $formBuilder
+        $form->handleRequest($request);
+
+        /*$formBuilder
             ->add('oldPassword', 'password')
             ->add('newPassword', 'repeated',
                 array(
@@ -269,11 +277,16 @@ class UserController extends Controller
             ->add('Modifier le mot de passe', 'submit');
 
         $form = $formBuilder->getForm();
-        $form->handleRequest($request);
+        $form->handleRequest($request);*/
+
+        $oldPassword = $form["oldPassword"]->getData();
+
+        print_r($oldPassword);
 
         if ($form->isValid()) {
-            if($form->getOldPassword() == $user->getPassword()){
-                echo 'oui';
+            print_r($user->getPassword());
+            if($oldPassword == $user->getPassword()){
+               print_r('oui');
             }
             /*$em = $this->getDoctrine()->getManager();
             $em->persist($user);

@@ -80,6 +80,7 @@ class User implements UserInterface
      * @var string
      *
      * @ORM\Column(name="mail", type="string", length=100)
+     *
      */
     private $mail;
 
@@ -87,6 +88,7 @@ class User implements UserInterface
      * @var string
      *
      * @ORM\Column(name="password", type="string", length=128)
+     * @Assert\Length(min = 6, minMessage = "Password should by at least 6 chars long")
      */
     private $password;
 
