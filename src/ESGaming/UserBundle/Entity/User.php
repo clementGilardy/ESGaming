@@ -5,6 +5,9 @@ namespace ESGaming\UserBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\Role\Role;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints\True;
+use EWZ\Bundle\RecaptchaBundle\Validator\Constraints as Recaptcha;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * User
@@ -41,21 +44,51 @@ class User implements UserInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="nickname", type="string", length=50)
+     * @ORM\Column(name="nickname", type="string", length=50, unique=true)
      */
     private $nickname;
 
     /**
      * @var string
      *
+     * @ORM\Column(name="lol_nickname", type="string", length=50, unique=true, nullable=true)
+     */
+    private $lol_nickname;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="steam_nickname", type="string", length=50, unique=true, nullable=true)
+     */
+    private $steam_nickname;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="origin_nickname", type="string", length=50, unique=true, nullable=true)
+     */
+    private $origin_nickname;
+
+    /**
+     * @var date
+     *
+     * @ORM\Column(name="birth_date", type="date")
+     */
+    private $birthDate;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="mail", type="string", length=100)
+     *
      */
     private $mail;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="password", type="string", length=50)
+     * @ORM\Column(name="password", type="string", length=128)
+     * @Assert\Length(min = 6, minMessage = "Password should by at least 6 chars long")
      */
     private $password;
 
@@ -66,6 +99,11 @@ class User implements UserInterface
      * @ORM\JoinColumn(nullable=false)
      */
     private $secretQuestion;
+
+    /**
+     * @Assert\File(maxSize="1M")
+     */
+    private $file;
 
     /**
      * @var string
@@ -88,12 +126,30 @@ class User implements UserInterface
      */
     private $secretAnswer;
 
+    /**
+     * @Recaptcha\IsTrue
+     */
+    public $recaptcha;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="activate", type="boolean", options={"default":true})
+     */
+    private $activate;
 
     /**
      * Get id
      *
      * @return integer
      */
+
+    /**
+     * @ORM\Column(type="string", length=32)
+     */
+    private $salt = "esg@ming-s@lt";
+
+
     public function getId()
     {
         return $this->id;
@@ -267,6 +323,45 @@ class User implements UserInterface
         return $this->picture;
     }
 
+    public function getUploadRootDir()
+    {
+        return __DIR__.'/../../../../web/'.$this->getUploadDir();
+    }
+
+    public function getUploadDir()
+    {
+        return 'uploads/profile_pictures';
+    }
+
+    /**
+     * @ORM\PrePersist()
+     * @ORM\PreUpdate()
+     */
+    public function preUpload()
+    {
+        if (null !== $this->file) {
+            // faites ce que vous voulez pour générer un nom unique
+            $this->picture = sha1(uniqid(mt_rand(), true)).'.'.$this->file->guessExtension();
+        }
+    }
+
+    /**
+     * @ORM\PostPersist()
+     * @ORM\PostUpdate()
+     */
+    public function upload()
+    {
+        if (null === $this->file) {
+            return;
+        }
+
+        $this->file->move($this->getUploadRootDir(), $this->file->getClientOriginalName());
+
+        $this->picture = $this->getUploadDir().'/'.$this->file->getClientOriginalName();
+
+        $this->file = null;
+    }
+
     /**
      * Set role
      *
@@ -315,6 +410,37 @@ class User implements UserInterface
         return $this->secretAnswer;
     }
 
+
+    /**
+     * Set activate
+     *
+     * @param boolean $activate
+     *
+     * @return User
+     */
+    public function setActivate($activate)
+    {
+        $this->activate = $activate;
+
+        return $this;
+    }
+
+    /**
+     * Get activate
+     *
+     * @return boolean
+     */
+    public function getActivate()
+    {
+        return $this->activate;
+    }
+
+    /*public function __construct()
+    {
+        $this->activate = true;
+        $this->salt = plaintext(uniqid(null, true));
+    }*/
+
     /**
      * Returns the roles granted to the user.
      *
@@ -333,7 +459,8 @@ class User implements UserInterface
      */
     public function getRoles()
     {
-        // TODO: Implement getRoles() method.
+        return array('ROLE_USER');
+
     }
 
     /**
@@ -345,7 +472,7 @@ class User implements UserInterface
      */
     public function getSalt()
     {
-        // TODO: Implement getSalt() method.
+        return $this->salt;
     }
 
     /**
@@ -372,5 +499,115 @@ class User implements UserInterface
     public function __toString()
     {
         return (string) $this->id;
+    }
+
+    /**
+     * Set salt
+     *
+     * @param string $salt
+     *
+     * @return User
+     */
+    public function setSalt($salt)
+    {
+        $this->salt = $salt;
+
+        return $this;
+    }
+
+    /**
+     * Set lolNickname
+     *
+     * @param string $lolNickname
+     *
+     * @return User
+     */
+    public function setLolNickname($lolNickname)
+    {
+        $this->lol_nickname = $lolNickname;
+
+        return $this;
+    }
+
+    /**
+     * Get lolNickname
+     *
+     * @return string
+     */
+    public function getLolNickname()
+    {
+        return $this->lol_nickname;
+    }
+
+    /**
+     * Set steamNickname
+     *
+     * @param string $steamNickname
+     *
+     * @return User
+     */
+    public function setSteamNickname($steamNickname)
+    {
+        $this->steam_nickname = $steamNickname;
+
+        return $this;
+    }
+
+    /**
+     * Get steamNickname
+     *
+     * @return string
+     */
+    public function getSteamNickname()
+    {
+        return $this->steam_nickname;
+    }
+
+    /**
+     * Set originNickname
+     *
+     * @param string $originNickname
+     *
+     * @return User
+     */
+    public function setOriginNickname($originNickname)
+    {
+        $this->origin_nickname = $originNickname;
+
+        return $this;
+    }
+
+    /**
+     * Get originNickname
+     *
+     * @return string
+     */
+    public function getOriginNickname()
+    {
+        return $this->origin_nickname;
+    }
+
+    /**
+     * Set birthDate
+     *
+     * @param \DateTime $birthDate
+     *
+     * @return User
+     */
+    public function setBirthDate($birthDate)
+    {
+        $this->birthDate = $birthDate;
+
+        return $this;
+    }
+
+    /**
+     * Get birthDate
+     *
+     * @return \DateTime
+     */
+    public function getBirthDate()
+    {
+        return $this->birthDate;
     }
 }

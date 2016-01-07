@@ -1,1 +1,9 @@
-Home
+{% if app.user is empty %}
+Home <br><br>
+   <a href="{{ path('login') }}">Se Connecter</a>  |  <a href="{{ path('es_gaming_user_register') }}">S'inscrire</a>
+{% else %}
+   {{ app.user.nickname }} <br><br>
+   <a href="{{ path('es_gaming_user_profile') }}">Afficher mon profil</a>  |  <a href="{{ path('logout') }}">Se deconnecter</a>
+{% endif %}
+
+

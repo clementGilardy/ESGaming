@@ -63,4 +63,3 @@ class Question
         return $this->question;
     }
 }
-
