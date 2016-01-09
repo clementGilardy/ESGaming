@@ -1,0 +1,24 @@
+div.nav-wrapper
+{
+    background: #123e4d;
+}
+
+a.brand-logo
+{
+    margin-left:100px;
+}
+
+ul.hide-on-med-and-down
+{
+    margin-left:200px;
+}
+
+a.dropdown-button img
+{
+    margin-top: 5px;
+}
+
+a.dropdown-button:hover
+{
+    background: none;
+}

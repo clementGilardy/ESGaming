@@ -3,11 +3,46 @@
     <head>
         <meta charset="UTF-8" />
         <title>{% block title %}ESGaming{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+            <link rel="stylesheet" href="http://fonts.googleapis.com/icon?family=Material+Icons">
+            <link rel="stylesheet" href="{{ asset('css/materialize.min.css') }}">
+        {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        {% block nav %}
+            <ul id="dropdown1" class="dropdown-content">
+                <li><a href="#!">one</a></li>
+                <li><a href="#!">two</a></li>
+                <li class="divider"></li>
+                <li><a href="#!">three</a></li>
+            </ul>
+            <nav>
+                <div class="nav-wrapper">
+                    <a href="#!" class="brand-logo">Logo</a>
+                    <ul class="hide-on-med-and-down">
+                        <li><a href="sass.html">Jeux</a></li>
+                        <li><a href="badges.html">News</a></li>
+                        <li><a href="badges.html">Contact</a></li>
+                        <li><a href="badges.html">Event</a></li>
+                        <li><a href="badges.html">A propos</a></li>
+                        <!-- Dropdown Trigger -->
+                       <!-- <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Dropdown<i class="material-icons right">arrow_drop_down</i></a></li>-->
+                    </ul>
+                    <ul class="right hide-on-med-and-down">
+                        <li><a class="dropdown-button" href="#!" data-activates="dropdown1"><img height="50px" src="{{ asset('images/pluswhite.png') }}" alt="plus"></a></li>
+                    </ul>
+                </div>
+            </nav>
+        {% endblock %}
+        {% block header %}{% endblock %}
+
+
+        {% block corps %}{% endblock %}
+        {% block javascripts %}
+            <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+            <script src="{{ asset('js/materialize.min.js') }}"></script>
+        {% endblock %}
     </body>
 </html>
