@@ -1,14 +1,15 @@
-Voici la liste des utilisateurs : <br>
-{% for user in users %}
-<br> ID : {{ user.id }}..... Pseudo : {{ user.nickname }}
-
- {% if  user.activate == true %}
-  <a href="{{ path('es_gaming_user_desactivate',{'id': user.id  }) }}">Desactiver</a>
- {% else %}
-  ( Cet utilisateur est desactive )
-  <a href="{{ path('es_gaming_user_activate',{'id': user.id  }) }}">Activer</a>
- {% endif %}
-
- <br>
-{% endfor %}
+{% extends "@ESGamingUser/layout.html.twig" %}
+{% block corps %}
+    Voici la liste des utilisateurs : <br>
+    {% for user in users %}
+        <br> ID : {{ user.id }}..... Pseudo : {{ user.nickname }}
+         {% if  user.activate == true %}
+             <a href="{{ path('es_gaming_user_desactivate',{'id': user.id  }) }}">Desactiver</a>
+         {% else %}
+            ( Cet utilisateur est desactive )
+            <a href="{{ path('es_gaming_user_activate',{'id': user.id  }) }}">Activer</a>
+         {% endif %}
+        <br>
+    {% endfor %}
+{% endblock %}
 

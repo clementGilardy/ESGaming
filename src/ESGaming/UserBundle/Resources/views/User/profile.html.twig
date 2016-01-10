@@ -1,13 +1,16 @@
-<h1>Profil de  {{ user.nickname }}</h1><br>
-    Pseudo : {{ user.nickname }}<br>
-    Prénom : {{ user.firstName }}<br>
-    Nom : {{ user.lastName }}<br>
-    Date de naissance : {{ user.birthDate|date("m/d/Y") }}<br>
-    Mail : {{ user.mail}}<br><br>
-    Pseudo League of Legend : {{ user.lolNickname }}<br>
-    Pseudo Steam : {{ user.SteamNickname }}<br>
-    Pseudo Origin : {{ user.originNickname }}<br>
+{% extends "@ESGamingUser/layout.html.twig" %}
+{% block corps %}
+    <h1>Profil de  {{ user.nickname }}</h1><br>
+        Pseudo : {{ user.nickname }}<br>
+        Prénom : {{ user.firstName }}<br>
+        Nom : {{ user.lastName }}<br>
+        Date de naissance : {{ user.birthDate|date("m/d/Y") }}<br>
+        Mail : {{ user.mail}}<br><br>
+        Pseudo League of Legend : {{ user.lolNickname }}<br>
+        Pseudo Steam : {{ user.SteamNickname }}<br>
+        Pseudo Origin : {{ user.originNickname }}<br>
 
 
 
-<br><a href="{{ path('es_gaming_user_edit_profile') }}">Modifier mon profil</a>  |  <a href="{{ path('es_gaming_user_change_password') }}">Modifier mon mot de passe</a>
+    <br><a href="{{ path('es_gaming_user_edit_profile') }}">Modifier mon profil</a>  |  <a href="{{ path('es_gaming_user_change_password') }}">Modifier mon mot de passe</a>
+{% endblock %}

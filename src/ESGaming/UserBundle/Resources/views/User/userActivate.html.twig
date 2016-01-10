@@ -1,3 +1,6 @@
-L'utilisateur d'id {{ user.id }} ( {{ user.nickname }} ) a ete active avec succes. <br>
+{% extends "@ESGamingUser/layout.html.twig" %}
+{% block corps %}
+    L'utilisateur d'id {{ user.id }} ( {{ user.nickname }} ) a ete active avec succes. <br>
 
-<a href="{{ path('es_gaming_user_all') }}">Retour</a>
+    <a href="{{ path('es_gaming_user_all') }}">Retour</a>
+{% endblock %}

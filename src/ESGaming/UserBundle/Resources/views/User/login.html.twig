@@ -1,26 +1,29 @@
-{% if error %}
-        {{ error.message }}
-{% endif %}
+{% extends "@ESGamingUser/layout.html.twig" %}
+{% block corps %}
+    {% if error %}
+            {{ error.message }}
+    {% endif %}
 
-<form action="{{ path("login_check", {}) }}" method="POST" >
-    <div class="form-group">
-        <label for="inputUsernameEmail">Username</label>
-        <input type="text" required="required" class="form-control" value="{{ last_username }}" name="_username" id="username">
-    </div>
+    <form action="{{ path("login_check", {}) }}" method="POST" >
+        <div class="form-group">
+            <label for="inputUsernameEmail">Username</label>
+            <input type="text" required="required" class="form-control" value="{{ last_username }}" name="_username" id="username">
+        </div>
 
-    <div class="form-group">
-        <label for="inputPassword">Password</label>
-        <input type="password" class="form-control" name="_password" required="required" id="password">
-    </div>
+        <div class="form-group">
+            <label for="inputPassword">Password</label>
+            <input type="password" class="form-control" name="_password" required="required" id="password">
+        </div>
 
-    <div class="checkbox pull-left">
-        <label>
-            <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
-            <label for="remember_me">Remember me</label>
-        </label>
-    </div>
+        <div class="checkbox pull-left">
+            <label>
+                <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+                <label for="remember_me">Remember me</label>
+            </label>
+        </div>
 
-    <button type="submit" name="login" class="pull-right btn btn btn-primary">
-        Log In
-    </button>
-</form>
+        <button type="submit" name="login" class="pull-right btn btn btn-primary">
+            Log In
+        </button>
+    </form>
+{% endblock %}
