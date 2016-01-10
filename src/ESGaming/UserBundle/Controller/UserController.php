@@ -33,13 +33,14 @@ class UserController extends Controller
 
         $formBuilder
             ->add('first_name', 'text', array(
-                'label' => 'Prenom'
+                'label' => 'Prénom'
             ))
-            ->add('last_name', 'text')
-            ->add('nickname', 'text')
-            ->add('birthDate', 'date', array(
+            ->add('last_name', 'text',array('label'=>'Nom'))
+            ->add('nickname', 'text',array('label'=>'Pseudo'))
+            ->add('birthDate', 'date', array('widget'=>'choice',
                 'label' => 'Date de Naissance',
-                'format' => 'dd MMMM yyyy',
+                'input'=>'timestamp',
+                'format' => 'd/M/y',
                 'years' => range(date('Y')-100,date('Y')-10)))
             ->add('mail', 'text')
             ->add('password', 'repeated',
@@ -47,14 +48,14 @@ class UserController extends Controller
                     'type' => 'password',
                     'invalid_message' => 'Password fields do not match',
                     'first_options' => array('label' => 'Password'),
-                    'second_options' => array('label' => 'Repeat Password')
+                    'second_options' => array('label' => 'Confirmation du Password')
                 )
             )
-            ->add('picture', 'file')
+            ->add('picture', 'file',array('label'=>'Avatar'))
             ->add('secret_question', 'entity', array('class' => 'ESGamingUserBundle:Question',
                 'property' => 'question', 'expanded' => false,
-                'multiple' => false))
-            ->add('secret_answer', 'text')
+                'multiple' => false,'label'=>'Question secrète'))
+            ->add('secret_answer', 'text',array('label'=>'Réponse secrète'))
             ->add('recaptcha', 'ewz_recaptcha')
             ->add('Ajouter', 'submit');
 
