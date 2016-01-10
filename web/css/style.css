@@ -5,7 +5,8 @@ div.nav-wrapper
 
 a.brand-logo
 {
-    margin-left:100px;
+    margin-left:10px;
+    margin-top: 3px;
 }
 
 ul.hide-on-med-and-down
