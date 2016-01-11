@@ -3,6 +3,16 @@ div.nav-wrapper
     background: #123e4d;
 }
 
+div.row
+{
+    height:0;
+}
+
+nav.col
+{
+    background: #123e4d;
+}
+
 a.brand-logo
 {
     margin-left:10px;
@@ -23,3 +33,4 @@ a.dropdown-button:hover
 {
     background: none;
 }
+
