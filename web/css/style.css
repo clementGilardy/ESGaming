@@ -34,3 +34,16 @@ a.dropdown-button:hover
     background: none;
 }
 
+div.foot.col
+{
+    background: #123e4d;
+    margin-top:10px;
+}
+
+footer.page-footer
+{
+    padding:0;
+    margin:0;
+    height:180px;
+    background: #123e4d;
+}

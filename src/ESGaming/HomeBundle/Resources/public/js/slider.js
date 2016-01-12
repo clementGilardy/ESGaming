@@ -3,3 +3,6 @@
  */
 $('.slider').slider({full_width: false});
 
+$('ul.indicators').css('position','relative');
+$('div.slider').css('height','420px');
+

@@ -1,6 +1,6 @@
 {% extends "@ESGamingHome/layout.html.twig" %}
 {% block stylesheets %}
-   {{ parent() }}
+    {{ parent() }}
     <link rel="stylesheet" href="{{ asset('bundles/esgaminghome/css/home.css') }}">
 {% endblock %}
 
@@ -40,9 +40,28 @@
             </ul>
         </div>
     </div>
+    <div class="opaque col s12"></div>
+    <div class="change col s12">
+        <div class="texte col s6 offset-s3">
+            <h3>OPERTIS PERICULIS</h3>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 150.</p>
+        </div>
+    </div>
+    <div class="game col s10 offset-s1">
+        <h2>Plus de jeux</h2>
+        <div class="case"></div>
+        <div class="case"></div>
+        <div class="case"></div>
+        <div class="case"></div>
+        <div class="case"></div>
+        <div class="case"></div>
+        <div class="case"></div>
+        <div class="case"></div>
+    </div>
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
     <script src="{{ asset('bundles/esgaminghome/js/slider.js') }}"></script>
 {% endblock %}
+
