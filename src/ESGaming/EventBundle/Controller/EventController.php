@@ -15,20 +15,6 @@ class EventController extends Controller
     }
 
 
-    /**public function addAction()
-    {
-        $add = array(
-            'titre'     =>"Titre de la news",
-            'date'      =>new \DateTime(),
-            'texte'   =>"Contenu de la news"
-        );
-        return $this->render('ESGamingEventBundle:Event:index.html.twig', array(
-            'add'       => $add,
-        ));
-
-    }
-}**/
-
     public function addAction(Request $request)
     {
         $event = new Event();
@@ -52,7 +38,7 @@ class EventController extends Controller
 
             $em->flush();
 
-            $request->getSession()->getFlashBag()->add('notice', 'Event bien enregistrée.');
+            $request->getSession()->getFlashBag()->add('notice', 'Event bien enregistrï¿½e.');
 
             return $this->redirect($this->generateUrl('es_gaming_event_get', array('id' => $event->getId())));
 
@@ -62,29 +48,30 @@ class EventController extends Controller
     }
 
 
-    public function deleteAction($id)
+    public function deleteAction($id, Request $request)
     {
-       /** $em = $this->container->get('doctrine')->getEntityManager();
-        $event = $em->find('ESGamingEventBundle:Event', $id);
 
-        $em->remove($event);
-        $em->flush();
+        $em = $this->getDoctrine()->getManager();
 
 
-        return new RedirectResponse($this->container->get('router')->generate('es_gaming_event_delete'));**/
+        $event = $em->getRepository('ESGamingEventBundle:Event')->find($id);
 
-        $em = $this->getDoctrine()->getEntityManager();
-        $guest = $em->getRepository('ESGamingEventBundle:Event')->find($id);
 
-        if (!$guest) {
-            throw $this->createNotFoundException('Rien trouvé pour cet id '.$id);
+        if ($event == null) {
+            throw $this->createNotFoundException("L'event d'id ".$id." n'existe pas.");
         }
 
-        $em->remove($guest);
-        $em->flush();
+        if ($request->isMethod('POST')) {
 
-        return $this->redirect($this->generateUrl('ESGamingEventBundle:Event:delete.html.twig'));
 
+            $request->getSession()->getFlashBag()->add('info', 'Evenement bien supprimÃ©.');
+
+
+        }
+
+        return $this->render('ESGamingEventBundle:Event:delete.html.twig', array(
+            'event' => $event
+        ));
     }
 
 
@@ -95,62 +82,40 @@ class EventController extends Controller
 
     $event= $em->getRepository('ESGamingEventBundle:Event')->findAll();
 
-    return $this->container->get('templating')->renderResponse('ESGamingEventBundle:Event:index.html.twig',
+    return $this->container->get('templating')->renderResponse('ESGamingEventBundle:Event:displayAll.html.twig',
         array(
             'event' => $event
         ));
 }
 
-    public function editAction($id = null)
-{
-    $message='';
-    $em = $this->container->get('doctrine')->getEntityManager();
 
-    if (isset($id))
+    public function displayOneAction($id)
+    {
+        $em = $this->container->get('doctrine')->getEntityManager();
+
+        $event= $em->getRepository('ESGamingEventBundle:Event')->find($id);
+
+        return $this->container->get('templating')->renderResponse('ESGamingEventBundle:Event:displayOne.html.twig',
+            array(
+                'event' => $event
+            ));
+    }
+
+    public function editAction($id)
     {
 
-        $event = $em->find('ESGamingEventBundle:Event', $id);
+        $em = $this->getDoctrine()->getManager();
 
-        if (!$event)
-        {
-            $message='Aucun evenement trouvé';
+        $event = $em->getRepository('ESGamingEventBundle:Event')->find($id);
+
+        if ($event == null) {
+            throw $this->createNotFoundException("L'event d'id ".$id." n'existe pas.");
         }
-    }
-    else
-    {
-        $event = new event();
-    }
 
-    $form = $this->container->get('form.factory')->create(new EventForm(), $event);
-
-    $request = $this->container->get('request');
-
-    if ($request->getMethod() == 'POST')
-    {
-        $form->bindRequest($request);
-
-        if ($form->isValid())
-        {
-            $em->persist($event);
-            $em->flush();
-            if (isset($id))
-            {
-                $message='Evenement modifié avec succès !';
-            }
-            else
-            {
-                $message='Evenement ajouté avec succès !';
-            }
-        }
-    }
-
-    return $this->container->get('templating')->renderResponse(
-        'ESGamingEventBundle:Event:index.html.twig',
-        array(
-            'form' => $form->createView(),
-            'message' => $message,
+        return $this->render('ESGamingEventBundle:Event:edit.html.twig', array(
+            'event' => $event
         ));
+    }
 }
 
-}
 ?>
