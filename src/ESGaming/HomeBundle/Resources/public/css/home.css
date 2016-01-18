@@ -58,7 +58,7 @@ div.change
 {
     color:white;
     background-color: #123e4d;
-    height:150px;
+    min-height:150px;
 }
 
 .change .texte
