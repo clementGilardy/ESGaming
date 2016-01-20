@@ -43,10 +43,8 @@ class GameAdmin extends Admin
             ->add('desc_long','text',array('label' => 'Description longue'))
             ->add('release_date','datetime',array('label' => 'Date de sortie'))
             ->add('mark',null,array('label' => 'Note'))
-            ->add('support',null,array('label' => 'Support' ))
             ->add('download_link','text',array('label' => 'Lien de téléchargement'))
             ->add('logo',null,array('label' => 'Logo'))
-            ->add('classification',null,array('label' => 'Classification'))
             ->add('banner',null,array('label' => 'Banniere'))
             ->add('trailer',null,array('label' => 'Trailer'));
 
@@ -66,15 +64,15 @@ class GameAdmin extends Admin
             ->add('desc_long','text',array('label' => 'Description longue'))
             ->add('release_date','sonata_type_date_picker',array('label' => 'Date de Sortie',
                                                                     'format' => 'yyyy-MM-dd'))
-            ->add('mark',null,array('label' => 'Note'))
-            ->add('support','sonata_type_immutable_array',array('keys' => array(
-                                                                            array('type', 'choice', array('choices' => array(1 => 'PC', 2 => 'PS3', 3 => 'XBox One'))))
-            ))
+            ->add('mark','choice',array('label' => 'Note','choices' => range(0,20)))
+            ->add('support','choice',array('multiple' => true,
+                                            'choices' => array(1 => 'PC', 2 => 'PS3', 3 => 'PS4', 4 => 'XBox 360', 5 => 'XBox One')))
             ->add('download_link','text',array('label' => 'Lien de téléchargement'))
             ->add('logo',null,array('label' => 'Logo'))
-            ->add('classification',null,array('label' => 'Classification'))
+            ->add('classification','choice',array('choices' => array(1 => 'PEGI 3', 2 => 'PEGI 7', 3 => 'PEGI 12', 4 => 'PEGI 16', 5 => 'PEGI 18')))
             ->add('banner',null,array('label' => 'Banniere'))
-            ->add('trailer',null,array('label' => 'Trailer'));
+            ->add('trailer',null,array('label' => 'Trailer'))
+            ->add('post_date','sonata_type_datetime_picker',array('data' => new \DateTime('now'),'read_only' => true,'pattern' => 'yyyy-MM-dd H:i:s'));
     }
 
     // Fields to be shown on filter forms

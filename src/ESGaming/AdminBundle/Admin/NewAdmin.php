@@ -25,7 +25,8 @@ class NewAdmin extends Admin
     protected function configureRoutes(RouteCollection $collection)
     {
         $collection
-            ->add('updateStatus');
+            ->add('updateStatus')
+            ->remove('create');
     }
 
     protected function configureListFields(ListMapper $list)
@@ -48,7 +49,10 @@ class NewAdmin extends Admin
     protected function configureFormFields(FormMapper $form)
     {
         $form
-            ->add('title',null,array('label' => 'Nom du Jeu'));
+            ->add('title',null,array('label' => 'Titre de la news'))
+            ->add('subtitle',null,array('label' => 'Sous-titre'))
+            ->add('text',null,array('label' => 'Contenu'))
+            ->add('main_banner','file',array('label' => 'Image'));
     }
 
     // Fields to be shown on filter forms

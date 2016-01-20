@@ -25,7 +25,8 @@ class UserAdmin extends Admin
     protected function configureRoutes(RouteCollection $collection)
     {
         $collection
-            ->add('updateStatus');
+            ->add('updateStatus')
+            ->remove('create');
     }
 
     protected function configureListFields(ListMapper $list)
@@ -38,6 +39,7 @@ class UserAdmin extends Admin
             ->add('first_name',null,array('label' => 'Prénom'))
             ->add('last_name',null,array('label' => 'Nom'))
             ->add('nickname',null,array('label' => 'Pseudo'))
+            ->add('role',null,array('label' => 'Role','class' => 'ESGamingGUserBundle/Entity/Role'))
             ->add('mail',null,array('label' => 'E-Mail'))
             ->add('activate',null,array('label' => 'Activé'));
 
@@ -49,7 +51,9 @@ class UserAdmin extends Admin
     protected function configureFormFields(FormMapper $form)
     {
         $form
-            ->add('activate',null,array('label' => 'Activer'));
+            ->add('role',null,array('label' => 'Role'))
+            ->add('activate','choice',array('label' => 'Activer',
+                'choices' => array(0 => 'Désactivé',1 => 'Activé')));
     }
 
     // Fields to be shown on filter forms
