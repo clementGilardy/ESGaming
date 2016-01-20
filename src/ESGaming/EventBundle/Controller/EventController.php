@@ -38,7 +38,7 @@ class EventController extends Controller
 
             $em->flush();
 
-            $request->getSession()->getFlashBag()->add('notice', 'Event bien enregistr�e.');
+            $request->getSession()->getFlashBag()->add('notice', 'Event bien enregistrée.');
 
             return $this->redirect($this->generateUrl('es_gaming_event_get', array('id' => $event->getId())));
 
@@ -82,10 +82,9 @@ class EventController extends Controller
 
     $event= $em->getRepository('ESGamingEventBundle:Event')->findAll();
 
-    return $this->container->get('templating')->renderResponse('ESGamingEventBundle:Event:displayAll.html.twig',
-        array(
-            'event' => $event
-        ));
+    return $this->render('ESGamingEventBundle:Event:displayAll.html.twig', array(
+        'events' => $event
+    ));
 }
 
 
@@ -95,10 +94,13 @@ class EventController extends Controller
 
         $event= $em->getRepository('ESGamingEventBundle:Event')->find($id);
 
-        return $this->container->get('templating')->renderResponse('ESGamingEventBundle:Event:displayOne.html.twig',
-            array(
-                'event' => $event
-            ));
+        if ($event == null) {
+            throw $this->createNotFoundException("L'event d'id ".$id." n'existe pas.");
+        }
+
+        return $this->render('ESGamingEventBundle:Event:displayOne.html.twig', array(
+            'event' => $event
+        ));
     }
 
     public function editAction($id)
@@ -114,7 +116,7 @@ class EventController extends Controller
 
         return $this->render('ESGamingEventBundle:Event:edit.html.twig', array(
             'event' => $event
-        ));
+    ));
     }
 }
 

@@ -9,8 +9,10 @@ es_gaming_event_add:
 
 
 es_gaming_event_delete:
-    path:     /delete
+    path:     /delete/{id}
     defaults: { _controller: ESGamingEventBundle:Event:delete }
+    requirements:
+      id: \d+
 
 
 es_gaming_event_displayAll:
@@ -18,6 +20,15 @@ es_gaming_event_displayAll:
     defaults: { _controller: ESGamingEventBundle:Event:displayAll }
 
 
+es_gaming_event_displayOne:
+    path:     /displayOne/{id}
+    defaults: { _controller: ESGamingEventBundle:Event:displayOne }
+    requirements:
+          id: \d+
+
+
 es_gaming_event_edit:
-    path:     /edit
+    path:     /edit/{id}
     defaults: { _controller: ESGamingEventBundle:Event:edit }
+    requirements:
+      id: \d+

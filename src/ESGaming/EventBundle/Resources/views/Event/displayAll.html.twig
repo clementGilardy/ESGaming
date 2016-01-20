@@ -1,1 +1,7 @@
-{{ id }}
+{% if events is not empty %}
+    {% for event in events %}
+        {{ event.event }}
+    {% endfor %}
+{% else %}
+    <p>Pas d'évènement</p>
+{% endif %}
