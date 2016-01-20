@@ -344,4 +344,38 @@ class News
     {
         return $this->type;
     }
+
+    /**
+     * Add comment
+     *
+     * @param \ESGaming\CommentBundle\Entity\Comment $comment
+     *
+     * @return News
+     */
+    public function addComment(\ESGaming\CommentBundle\Entity\Comment $comment)
+    {
+        $this->comments[] = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Remove comment
+     *
+     * @param \ESGaming\CommentBundle\Entity\Comment $comment
+     */
+    public function removeComment(\ESGaming\CommentBundle\Entity\Comment $comment)
+    {
+        $this->comments->removeElement($comment);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
 }

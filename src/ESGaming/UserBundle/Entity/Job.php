@@ -68,4 +68,3 @@ class Job
         return (string) $this->id;
     }
 }
-

@@ -9,6 +9,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class NewsController extends Controller
 {
+
     public function indexAction()
     {
         $repository = $this->getDoctrine()->getManager()->getRepository('ESGamingNewBundle:News');
@@ -21,9 +22,20 @@ class NewsController extends Controller
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function addAction(Request $request)
+    public function addAction(Request $request,$id = null)
     {
+        $label = "Ajouter";
         $new = new News();
+
+        if($id != null){
+            $id = (int)trim($id);
+            if(is_numeric($id)){
+                $repository = $this->getDoctrine()->getManager()->getRepository('ESGamingNewBundle:News');
+                $new = $repository->find($id);
+                $label = "Modifier";
+            }
+        }
+
         $formBuilder = $this->get('form.factory')->createBuilder('form',$new);
 
         $formBuilder
@@ -37,7 +49,7 @@ class NewsController extends Controller
             ->add('type','entity',array('class'=>'ESGamingNewBundle:Type',
                 'property'=>'name','expanded'=>false,
                 'multiple'=>false))
-            ->add('Ajouter','submit');
+            ->add($label,'submit');
 
         $form = $formBuilder->getForm();
         $form->handleRequest($request);
@@ -69,11 +81,31 @@ class NewsController extends Controller
         $repository = $this->getDoctrine()->getManager()->getRepository('ESGamingNewBundle:News');
         $new        = $repository->find($id);
 
-        if($new === null)
-        {
+        if($new === null) {
             throw new NotFoundHttpException("L'annonce n°$id n'existe pas");
         }
 
         return $this->render('ESGamingNewBundle:News:new.html.twig',array('new'=>$new));
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function deleteAction($id)
+    {
+        if(isset($id) && !empty($id)){
+            $em         = $this->getDoctrine()->getManager();
+            $repository = $this->getDoctrine()->getManager()->getRepository('ESGamingNewBundle:News');
+            $new        = $repository->find($id);
+
+            if(isset($new) && !empty($new)) {
+                $em->remove($new);
+                $em->flush();
+            }
+        }
+
+
+        return $this->render('ESGamingNewBundle:News:index.html.twig');
     }
 }

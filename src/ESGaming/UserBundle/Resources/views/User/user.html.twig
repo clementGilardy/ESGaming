@@ -1,1 +1,5 @@
-L'utilisateur n°{{ user.id }} s'appelle {{ user.firstName }} {{ user.lastName }} et est surnommé {{ user.nickname }}.
+{% extends "@ESGamingUser/layout.html.twig" %}
+{% block corps %}
+    L'utilisateur n°{{ user.id }} s'appellant {{ user.firstName }} {{ user.lastName }} et etant surnommé {{ user.nickname }} a ete cree avec succes.<br><br>
+    <a href="{{ path('es_gaming_home_homepage') }}">Retour a l'accueil</a>
+{% endblock %}
