@@ -22,15 +22,15 @@ class Event
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="ESGaming\UserBundle\Entity\User")
+     * @ORM\ManyToMany(targetEntity="ESGaming\UserBundle\Entity\User", mappedBy="events")
      * @ORM\JoinColumn(nullable=true)
      */
-    private $user;
+    private $users;
 
     /**
-     * @ORM\OneToOne(targetEntity="ESGaming\GameBundle\Entity\Game")
+     * @ORM\ManyToMany(targetEntity="ESGaming\GameBundle\Entity\Game", mappedBy="events")
      */
-    private $game;
+    private $games;
 
     /**
      * @var string

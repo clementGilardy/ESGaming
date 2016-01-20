@@ -42,6 +42,12 @@ class User implements UserInterface
     private $lastName;
 
     /**
+     * @ORM\ManyToMany(targetEntity="ESGaming\EventBundle\Entity\Event", inversedBy="users")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $events;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="nickname", type="string", length=50, unique=true)
@@ -340,7 +346,7 @@ class User implements UserInterface
     public function preUpload()
     {
         if (null !== $this->file) {
-            // faites ce que vous voulez pour générer un nom unique
+            // faites ce que vous voulez pour gï¿½nï¿½rer un nom unique
             $this->picture = sha1(uniqid(mt_rand(), true)).'.'.$this->file->guessExtension();
         }
     }
