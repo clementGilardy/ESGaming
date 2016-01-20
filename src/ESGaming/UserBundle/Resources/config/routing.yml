@@ -28,6 +28,10 @@ es_gaming_user_profile:
     path: /profile
     defaults: { _controller: ESGamingUserBundle:User:profile }
 
+es_gaming_user_profile_id:
+    path: /profile-{id}
+    defaults: { _controller: ESGamingUserBundle:User:profile }
+
 es_gaming_user_change_password:
     path: /profile/change-password
     defaults: { _controller: ESGamingUserBundle:User:changePassword }

@@ -114,7 +114,7 @@ class User implements UserInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="picture", type="string", length=255)
+     * @ORM\Column(name="picture", type="string", length=255, unique=true)
      */
     private $picture;
 
@@ -305,6 +305,17 @@ class User implements UserInterface
         return $this->secretQuestion;
     }
 
+    public function getFile()
+    {
+        return $this->file;
+    }
+
+    public function setFile($f)
+    {
+        $this->file = $f;
+
+    }
+
     /**
      * Set picture
      *
@@ -315,6 +326,8 @@ class User implements UserInterface
     public function setPicture($picture)
     {
         $this->picture = $picture;
+        $this->setFile($picture);
+        $this->upload();
 
         return $this;
     }
@@ -361,9 +374,11 @@ class User implements UserInterface
             return;
         }
 
-        $this->file->move($this->getUploadRootDir(), $this->file->getClientOriginalName());
+        $filename = sha1(uniqid(mt_rand(),true)).'.'.$this->file->getClientOriginalExtension();
 
-        $this->picture = $this->getUploadDir().'/'.$this->file->getClientOriginalName();
+        $this->file->move($this->getUploadRootDir(), $filename);
+
+        $this->picture = $this->getUploadDir().'/'.$filename;
 
         $this->file = null;
     }
