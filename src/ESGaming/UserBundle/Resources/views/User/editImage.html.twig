@@ -1,0 +1,7 @@
+{% extends "@ESGamingUser/layout.html.twig" %}
+{% block corps %}
+    <h1>Modification de l'image du profil</h1><br><br>
+
+    Image actuelle : <img src="{{ asset(user.picture) }}"/><br><br>
+    {{ form(form) }}
+{% endblock %}

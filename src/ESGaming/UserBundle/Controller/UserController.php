@@ -199,6 +199,7 @@ class UserController extends Controller
 
     public function editProfileAction(Request $request)
     {
+
         $user = $this->get('security.token_storage')->getToken()->getUser();
         $oldPicture = $user->getPicture();
         $formBuilder = $this->get('form.factory')->createBuilder('form', $user);
@@ -225,9 +226,6 @@ class UserController extends Controller
                 'format' => 'dd MMMM yyyy',
                 'years' => range(date('Y')-100,date('Y')-10) ))
             ->add('mail', 'text')
-            ->add('picture','file', array(
-                'data_class' => null,
-            ))
 
             ->add('secret_question', 'entity', array('class' => 'ESGamingUserBundle:Question',
                 'property' => 'question', 'expanded' => false,
@@ -241,10 +239,11 @@ class UserController extends Controller
         if ($form->isValid()) {
 
             $em = $this->getDoctrine()->getManager();
+
             $em->persist($user);
 
             $em->flush();
-            unlink($oldPicture);
+
             $request->getSession()->getFlashBag()->add('notice', 'Profil modifie avec succes.');
 
             return $this->redirect($this->generateUrl('es_gaming_user_profile', array('user' => $user)));
@@ -295,6 +294,39 @@ class UserController extends Controller
             throw new NotFoundHttpException("L'user n°$id n'existe pas");
         }
         return $this->render('ESGamingUserBundle:User:profileId.html.twig', array('user' => $user));
+    }
+
+
+
+    public function editImageAction(Request $request)
+    {
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        $oldPicture = $user->getPicture();
+        $formBuilder = $this->get('form.factory')->createBuilder('form', $user);
+
+        $formBuilder
+
+            ->add('picture','file', array(
+                'data_class' => null,
+                'required' => false,
+            ))
+
+            ->add('Modifier', 'submit');
+
+        $form = $formBuilder->getForm();
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
+            $oldPicture!=null?unlink($oldPicture):null;
+            $request->getSession()->getFlashBag()->add('notice', 'Image modifiée avec succes.');
+
+            return $this->redirect($this->generateUrl('es_gaming_user_profile', array('user' => $user)));
+        }
+        return $this->render('ESGamingUserBundle:User:editImage.html.twig', array('form' => $form->createView(),'user' => $user));
     }
 
 }

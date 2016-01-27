@@ -39,3 +39,7 @@ es_gaming_user_change_password:
 es_gaming_user_edit_profile:
     path: /profile/edit
     defaults: { _controller: ESGamingUserBundle:User:editProfile }
+
+es_gaming_user_editImage:
+     path: /profile/edit-image
+     defaults: { _controller: ESGamingUserBundle:User:editImage }
