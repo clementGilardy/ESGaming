@@ -1,6 +1,8 @@
-nav
+.row nav.col
 {
-    z-index: 10;
+    z-index: 100;
+    margin-top: 20px;
+    position: relative;
 }
 
 .corps
