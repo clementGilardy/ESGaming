@@ -32,7 +32,7 @@ a {
 
 div.nav-wrapper
 {
-    background: #123e4d;
+    background: #2c2c2c;
 }
 
 div.row
@@ -42,7 +42,7 @@ div.row
 
 nav.col
 {
-    background: #123e4d;
+    background: #2c2c2c;
 }
 
 a.brand-logo
@@ -64,20 +64,6 @@ a.dropdown-button img
 a.dropdown-button:hover
 {
     background: none;
-}
-
-div.foot.col
-{
-    background: #123e4d;
-    margin-top:20px;
-}
-
-footer.page-footer
-{
-    margin:0;
-    padding:0;
-    height:180px;
-    background: #123e4d;
 }
 
 select{

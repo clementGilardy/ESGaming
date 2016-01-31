@@ -1,8 +1,12 @@
-header.col
+nav
 {
-    background: #2a2a2a url('../images/header.png') right no-repeat;
-    background-size: auto 200px;
-    height:200px;
+    z-index: 10;
+}
+
+.corps
+{
+    position:absolute;
+    top:0;
 }
 
 div.text
@@ -25,14 +29,12 @@ div.text p
 
 div.slider
 {
+    z-index:1;
+    margin:0;
+    padding:0;
     margin-top:-20px;
     height:300px;
 
-}
-
-ul.indicators
-{
-    z-index:30;
 }
 
 .slider .indicators .indicator-item.active
@@ -43,48 +45,4 @@ ul.indicators
 .slider .indicators .indicator-item
 {
     background-color: gray;
-}
-
-.opaque
-{
-    z-index: 20;
-    margin-top:-20px;
-    height:20px;
-    background: #f33502;
-    opacity: 0.7;
-}
-
-div.change
-{
-    color:white;
-    background-color: #123e4d;
-    min-height:150px;
-}
-
-.change .texte
-{
-    text-align: center;
-}
-
-.game
-{
-    margin-top:5px;
-    display:block;
-}
-
-.game h2
-{
-    color: #474747;
-    font-size: 30px;
-}
-
-.game .case
-{
-    display: inline-block;
-    background: black;
-    width:250px;
-    height:250px;
-    margin-right:5px;
-    margin-bottom: 10px;
-
 }
