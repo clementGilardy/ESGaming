@@ -32,31 +32,31 @@ class UserController extends Controller
         $formBuilder = $this->get('form.factory')->createBuilder('form', $user);
 
         $formBuilder
-            ->add('first_name', 'text', array(
-                'label' => 'Prénom'
-            ))
-            ->add('last_name', 'text',array('label'=>'Nom'))
-            ->add('nickname', 'text',array('label'=>'Pseudo'))
-            ->add('birthDate', 'date', array('widget'=>'choice',
-                'label' => 'Date de Naissance',
-                'format' => 'dd MMMM yyyy',
-                'years' => range(date('Y')-100,date('Y')-10)))
-            ->add('mail', 'text')
-            ->add('password', 'repeated',
-                array(
-                    'type' => 'password',
-                    'invalid_message' => 'Password fields do not match',
-                    'first_options' => array('label' => 'Password'),
-                    'second_options' => array('label' => 'Confirmation du Password')
-                )
+                   ->add('first_name', 'text', array(
+        'label' => 'Prénom'
+    ))
+        ->add('last_name', 'text',array('label'=>'Nom'))
+        ->add('nickname', 'text',array('label'=>'Pseudo'))
+        ->add('birthDate', 'date', array('widget'=>'choice',
+            'label' => 'Date de Naissance',
+            'format' => 'dd MMMM yyyy',
+            'years' => range(date('Y')-100,date('Y')-10)))
+        ->add('mail', 'text')
+        ->add('password', 'repeated',
+            array(
+                'type' => 'password',
+                'invalid_message' => 'Password fields do not match',
+                'first_options' => array('label' => 'Password'),
+                'second_options' => array('label' => 'Confirmation du Password')
             )
-            ->add('picture', 'file',array('label'=>'Avatar'))
-            ->add('secret_question', 'entity', array('class' => 'ESGamingUserBundle:Question',
-                'property' => 'question', 'expanded' => false,
-                'multiple' => false,'label'=>'Question secrète'))
-            ->add('secret_answer', 'text',array('label'=>'Réponse secrète'))
-            ->add('recaptcha', 'ewz_recaptcha')
-            ->add('Ajouter', 'submit');
+        )
+        ->add('picture', 'file',array('label'=>'Avatar'))
+        ->add('secret_question', 'entity', array('class' => 'ESGamingUserBundle:Question',
+            'property' => 'question', 'expanded' => false,
+            'multiple' => false,'label'=>'Question secrète'))
+        ->add('secret_answer', 'text',array('label'=>'Réponse secrète'))
+        ->add('recaptcha', 'ewz_recaptcha')
+        ->add('Ajouter', 'submit');
 
         $form = $formBuilder->getForm();
         $form->handleRequest($request);

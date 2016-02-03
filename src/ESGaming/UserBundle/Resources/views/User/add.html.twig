@@ -1,5 +1,46 @@
 {%extends "@ESGamingUser/layout.html.twig" %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/esgaminguser/css/form.css') }}">
+{% endblock %}
+
 {% block corps %}
-    {{ form(form) }}
-{%endblock %}
+    {# src/OC/PlatformBundle/Resources/views/Advert/form.html.twig #}
+
+    <h3>Formulaire d'annonce</h3>
+
+
+        {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+
+        {# Les erreurs générales du formulaire. #}
+        {{ form_errors(form) }}
+
+        <div class="row">
+            <div class="input-field col s12">
+                {# Génération du label. #}
+                {{ form_widget(form.first_name, {'attr': {'class': 'validate'}}) }}
+                {{ form_label(form.first_name, "Prénom", {'label_attr': {'class': 'input-field col s12'}}) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                {# Génération du label. #}
+                {{ form_widget(form.last_name, {'attr': {'class': 'validate'}}) }}
+                {{ form_label(form.last_name, "Nom", {'label_attr': {'class': 'input-field col s12'}}) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                {# Génération du label. #}
+                {{ form_widget(form.nickname, {'attr': {'class': 'validate'}}) }}
+                {{ form_label(form.nickname, "Pseudo", {'label_attr': {'class': 'input-field col s12'}}) }}
+            </div>
+        </div>
+
+    {{ form_rest(form) }}
+
+    {# Fermeture de la balise <form> du formulaire HTML #}
+    {{ form_end(form) }}
+
+    {% endblock corps %}
