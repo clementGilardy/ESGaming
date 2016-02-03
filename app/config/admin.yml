@@ -10,18 +10,19 @@ services:
     sonata.admin.game:
         class: ESGaming\AdminBundle\Admin\GameAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Game" }
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Jeux" }
         arguments:
             - ~
             - ESGaming\GameBundle\Entity\Game
             - ~
         calls:
             - [ setEntityManager, [@doctrine.orm.entity_manager]]
+            - [ setTemplate, [list, ESGamingAdminBundle:GameAdmin:list.html.twig]]
 
     sonata.admin.new:
         class: ESGaming\AdminBundle\Admin\NewAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Content", label: "New" }
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "News" }
         arguments:
             - ~
             - ESGaming\NewBundle\Entity\News
@@ -32,7 +33,7 @@ services:
     sonata.admin.user:
         class: ESGaming\AdminBundle\Admin\UserAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Content", label: "User" }
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Utilisateurs" }
         arguments:
             - ~
             - ESGaming\UserBundle\Entity\User

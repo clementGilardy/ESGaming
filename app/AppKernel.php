@@ -27,6 +27,7 @@ class AppKernel extends Kernel
             new Sonata\AdminBundle\SonataAdminBundle(),
 
             new ESGaming\NewBundle\ESGamingNewBundle(),
+            new ESGaming\AdminBundle\ESGamingAdminBundle(),
             new ESGaming\HomeBundle\ESGamingHomeBundle(),
             new ESGaming\UserBundle\ESGamingUserBundle(),
             new ESGaming\GameBundle\ESGamingGameBundle(),

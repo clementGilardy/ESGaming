@@ -37,16 +37,7 @@ class GameAdmin extends Admin
             ->addIdentifier('id',null,array('label' => 'Identifiant jeu'))
             ->add('name',null,array('label' => 'Nom du Jeu'))
             ->add('editor',null,array('label' => 'Editeur'))
-            ->add('developer',null,array('label' => 'Developpeur'))
-            ->add('type',null,array('label' => 'Type'))
-            ->add('desc_short','text',array('label' => 'Description courte'))
-            ->add('desc_long','text',array('label' => 'Description longue'))
-            ->add('release_date','datetime',array('label' => 'Date de sortie'))
-            ->add('mark',null,array('label' => 'Note'))
-            ->add('download_link','text',array('label' => 'Lien de téléchargement'))
-            ->add('logo',null,array('label' => 'Logo'))
-            ->add('banner',null,array('label' => 'Banniere'))
-            ->add('trailer',null,array('label' => 'Trailer'));
+            ->add('logo',null,array('label' => 'Logo'));
 
         $list->add('_action', 'actions', array(
             'actions' => $actions
