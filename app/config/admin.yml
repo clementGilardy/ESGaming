@@ -1,0 +1,42 @@
+services:
+    # Remove user management
+    sonata.user.admin.group:
+        abstract: true
+        public: false
+    sonata.user.admin.user:
+        abstract: true
+        public: false
+
+    sonata.admin.game:
+        class: ESGaming\AdminBundle\Admin\GameAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Jeux" }
+        arguments:
+            - ~
+            - ESGaming\GameBundle\Entity\Game
+            - ~
+        calls:
+            - [ setEntityManager, [@doctrine.orm.entity_manager]]
+            - [ setTemplate, [list, ESGamingAdminBundle:GameAdmin:list.html.twig]]
+
+    sonata.admin.new:
+        class: ESGaming\AdminBundle\Admin\NewAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "News" }
+        arguments:
+            - ~
+            - ESGaming\NewBundle\Entity\News
+            - ~
+        calls:
+            - [ setEntityManager, [@doctrine.orm.entity_manager]]
+
+    sonata.admin.user:
+        class: ESGaming\AdminBundle\Admin\UserAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Utilisateurs" }
+        arguments:
+            - ~
+            - ESGaming\UserBundle\Entity\User
+            - ~
+        calls:
+            - [ setEntityManager, [@doctrine.orm.entity_manager]]
