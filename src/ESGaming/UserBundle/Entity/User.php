@@ -42,6 +42,12 @@ class User implements UserInterface
     private $lastName;
 
     /**
+     * @ORM\ManyToMany(targetEntity="ESGaming\EventBundle\Entity\Event", inversedBy="users")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $events;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="nickname", type="string", length=50, unique=true)
@@ -108,7 +114,7 @@ class User implements UserInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="picture", type="string", length=255)
+     * @ORM\Column(name="picture", type="string", length=255, unique=true)
      */
     private $picture;
 
@@ -299,6 +305,17 @@ class User implements UserInterface
         return $this->secretQuestion;
     }
 
+    public function getFile()
+    {
+        return $this->file;
+    }
+
+    public function setFile($f)
+    {
+        $this->file = $f;
+
+    }
+
     /**
      * Set picture
      *
@@ -309,6 +326,8 @@ class User implements UserInterface
     public function setPicture($picture)
     {
         $this->picture = $picture;
+        $this->setFile($picture);
+        $this->upload();
 
         return $this;
     }
@@ -340,7 +359,7 @@ class User implements UserInterface
     public function preUpload()
     {
         if (null !== $this->file) {
-            // faites ce que vous voulez pour générer un nom unique
+            // faites ce que vous voulez pour gï¿½nï¿½rer un nom unique
             $this->picture = sha1(uniqid(mt_rand(), true)).'.'.$this->file->guessExtension();
         }
     }
@@ -355,9 +374,11 @@ class User implements UserInterface
             return;
         }
 
-        $this->file->move($this->getUploadRootDir(), $this->file->getClientOriginalName());
+        $filename = sha1(uniqid(mt_rand(),true)).'.'.$this->file->getClientOriginalExtension();
 
-        $this->picture = $this->getUploadDir().'/'.$this->file->getClientOriginalName();
+        $this->file->move($this->getUploadRootDir(), $filename);
+
+        $this->picture = $this->getUploadDir().'/'.$filename;
 
         $this->file = null;
     }

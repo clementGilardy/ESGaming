@@ -57,6 +57,12 @@ class Game
     private $developer;
 
     /**
+     * @ORM\ManyToMany(targetEntity="ESGaming\EventBundle\Entity\Event", inversedBy="games")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $events;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="type", type="string", length=50)

@@ -1,0 +1,34 @@
+es_gaming_event_homepage:
+    path:     /
+    defaults: { _controller: ESGamingEventBundle:Event:index }
+
+
+es_gaming_event_add:
+    path:     /add
+    defaults: { _controller: ESGamingEventBundle:Event:add }
+
+
+es_gaming_event_delete:
+    path:     /delete/{id}
+    defaults: { _controller: ESGamingEventBundle:Event:delete }
+    requirements:
+      id: \d+
+
+
+es_gaming_event_displayAll:
+    path:     /displayAll
+    defaults: { _controller: ESGamingEventBundle:Event:displayAll }
+
+
+es_gaming_event_displayOne:
+    path:     /displayOne/{id}
+    defaults: { _controller: ESGamingEventBundle:Event:displayOne }
+    requirements:
+          id: \d+
+
+
+es_gaming_event_edit:
+    path:     /edit/{id}
+    defaults: { _controller: ESGamingEventBundle:Event:edit }
+    requirements:
+      id: \d+

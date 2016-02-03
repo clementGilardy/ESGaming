@@ -57,7 +57,7 @@ class NewsController extends Controller
         if ($form->isValid()) {
 
             $em = $this->getDoctrine()->getManager();
-            $new->setAuthor($this->getUser());
+            $new->setAuthor($this->container->get('security.context')->getToken()->getUser());
             $new->upload();
             $em->persist($new);
 

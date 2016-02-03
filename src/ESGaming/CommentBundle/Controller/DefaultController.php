@@ -8,6 +8,6 @@ class DefaultController extends Controller
 {
     public function indexAction($name)
     {
-        return $this->render('ESGamingCommentBundle:Default:index.html.twig', array('name' => $name));
+        return $this->render('ESGamingCommentBundle:Event:index.html.twig', array('name' => $name));
     }
 }

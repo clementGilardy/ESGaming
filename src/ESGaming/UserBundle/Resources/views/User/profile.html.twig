@@ -1,6 +1,11 @@
 {% extends "@ESGamingUser/layout.html.twig" %}
 {% block corps %}
     <h1>Profil de  {{ user.nickname }}</h1><br>
+
+        Photo de profil : <img src="{{ asset(user.picture) }}"/> <br><br>
+
+    <a href="{{ path('es_gaming_user_editImage') }}">Modifier mon image de profil</a> <br><br>
+
         Pseudo : {{ user.nickname }}<br>
         Prénom : {{ user.firstName }}<br>
         Nom : {{ user.lastName }}<br>

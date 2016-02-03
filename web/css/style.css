@@ -79,3 +79,8 @@ footer.page-footer
     height:180px;
     background: #123e4d;
 }
+
+select{
+    display: inline-block;
+    width: 8%;
+}
