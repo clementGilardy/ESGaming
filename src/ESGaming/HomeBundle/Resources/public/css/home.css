@@ -35,7 +35,11 @@ div.slider
     margin:0;
     padding:0;
     margin-top:-20px;
-    height:300px;
+}
+
+div.slider ul.slides
+{
+    height: 600px !important;
 }
 
 ul.slide li
@@ -53,7 +57,7 @@ div.caption.bottom-align
     text-align:center;
     position:absolute;
     height:200px;
-    bottom: 10;
+    bottom: 10px;
     top: auto;
 }
 
