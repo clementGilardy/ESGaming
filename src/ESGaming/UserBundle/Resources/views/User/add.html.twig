@@ -6,37 +6,98 @@
 {% endblock %}
 
 {% block corps %}
-    {# src/OC/PlatformBundle/Resources/views/Advert/form.html.twig #}
-
-    <h3>Formulaire d'annonce</h3>
+    <h3>Inscription</h3>
 
 
-        {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+        {{ form_start(form, {'attr': {'class': 'col-s12'}}) }}
 
         {# Les erreurs générales du formulaire. #}
         {{ form_errors(form) }}
 
-        <div class="row">
-            <div class="input-field col s12">
-                {# Génération du label. #}
-                {{ form_widget(form.first_name, {'attr': {'class': 'validate'}}) }}
-                {{ form_label(form.first_name, "Prénom", {'label_attr': {'class': 'input-field col s12'}}) }}
+    <div class="row">
+        <div class="input-field col s6">
+            {# Génération du label. #}
+
+            {{ form_widget(form.first_name, {'attr': {'class': 'validate'}}) }}
+            {{ form_label(form.first_name) }}
+        </div>
+        <div class="input-field col s6">
+            {# Génération du label. #}
+            {{ form_widget(form.last_name, {'attr': {'class': 'validate'}}) }}
+            {{ form_label(form.last_name) }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="input-field col s6">
+            {# Génération du label. #}
+            {{ form_widget(form.nickname, {'attr': {'class': 'validate'}}) }}
+            {{ form_label(form.nickname) }}
+        </div>
+        <div class="input-field col s6">
+            {# Génération du label. #}
+            {{ form_widget(form.birthDate, {'attr': {'class': 'datepicker'}}) }}
+            {{ form_label(form.birthDate) }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="input-field col s6">
+            {# Génération du label. #}
+            {{ form_widget(form.password.first, {'attr': {'class': 'validate'}}) }}
+            {{ form_label(form.password.first) }}
+        </div>
+        <div class="input-field col s6">
+            {# Génération du label. #}
+            {{ form_widget(form.password.second, {'attr': {'class': 'validate'}}) }}
+            {{ form_label(form.password.second) }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="input-field col s6">
+            {# Génération du label. #}
+            {{ form_widget(form.mail, {'attr': {'class': 'validate'}}) }}
+            {{ form_label(form.mail) }}
+        </div>
+
+        <div class="file-field input-field col s6">
+            {# Génération du label. #}
+            <div class="btn">
+                <span>File</span>
+                {{ form_widget(form.picture, {'attr': {'class': 'file'}}) }}
+            </div>
+            <div class="file-path-wrapper">
+                <input class="file-path validate" type="text">
             </div>
         </div>
-        <div class="row">
-            <div class="input-field col s12">
-                {# Génération du label. #}
-                {{ form_widget(form.last_name, {'attr': {'class': 'validate'}}) }}
-                {{ form_label(form.last_name, "Nom", {'label_attr': {'class': 'input-field col s12'}}) }}
-            </div>
+    </div>
+
+    <div class="row">
+        <div class="input-field col s6">
+            {# Génération du label. #}
+            {{ form_widget(form.secret_question) }}
         </div>
-        <div class="row">
-            <div class="input-field col s12">
-                {# Génération du label. #}
-                {{ form_widget(form.nickname, {'attr': {'class': 'validate'}}) }}
-                {{ form_label(form.nickname, "Pseudo", {'label_attr': {'class': 'input-field col s12'}}) }}
-            </div>
+        <div class="input-field col s6">
+            {# Génération du label. #}
+            {{ form_widget(form.secret_answer, {'attr': {'class': 'validate'}}) }}
+            {{ form_label(form.secret_answer) }}
         </div>
+    </div>
+
+    <div class="row">
+        <div class="input-field col s12">
+            {# Génération du label. #}
+            {{ form_widget(form.recaptcha) }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="input-field col s1">
+            {# Génération du label. #}
+            {{ form_widget(form.Ajouter, {'attr': {'class': 'waves-effect waves-light btn'}}) }}
+        </div>
+    </div>
 
     {{ form_rest(form) }}
 
@@ -44,3 +105,9 @@
     {{ form_end(form) }}
 
     {% endblock corps %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/esgaminguser/js/datepicker.js') }}"></script>
+    <script src="{{ asset('bundles/esgaminguser/js/select.js') }}"></script>
+{% endblock %}

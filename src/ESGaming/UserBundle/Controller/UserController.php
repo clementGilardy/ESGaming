@@ -37,10 +37,7 @@ class UserController extends Controller
     ))
         ->add('last_name', 'text',array('label'=>'Nom'))
         ->add('nickname', 'text',array('label'=>'Pseudo'))
-        ->add('birthDate', 'date', array('widget'=>'choice',
-            'label' => 'Date de Naissance',
-            'format' => 'dd MMMM yyyy',
-            'years' => range(date('Y')-100,date('Y')-10)))
+        ->add('birthDate', 'date', array('widget'=>'single_text'))
         ->add('mail', 'text')
         ->add('password', 'repeated',
             array(
@@ -55,7 +52,13 @@ class UserController extends Controller
             'property' => 'question', 'expanded' => false,
             'multiple' => false,'label'=>'Question secrète'))
         ->add('secret_answer', 'text',array('label'=>'Réponse secrète'))
-        ->add('recaptcha', 'ewz_recaptcha')
+        ->add('recaptcha', 'ewz_recaptcha',array(
+            'attr' => array(
+                'options' => array(
+                    'theme' => 'light',
+                    'type'  => 'image'
+                )
+            )))
         ->add('Ajouter', 'submit');
 
         $form = $formBuilder->getForm();
