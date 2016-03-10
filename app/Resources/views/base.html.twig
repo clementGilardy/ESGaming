@@ -7,6 +7,7 @@
             <link rel="stylesheet" href="http://fonts.googleapis.com/icon?family=Material+Icons">
             <link rel="stylesheet" href="{{ asset('css/materialize.min.css') }}">
             <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
@@ -25,7 +26,7 @@
                                 <li><a href="{{ path('logout') }}">Se deconnecter</a></li>
                             {% endif %}
                         </ul>
-                        <nav class="col s12">
+                        <nav class="col s12 large-navbar">
                             <div class="nav-wrapper">
                                 <a href="{{ path('es_gaming_home_homepage') }}" class="brand-logo"><img height="35px" src="{{ asset('images/esgaming.png') }}" alt="logo"></a>
                                 <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
@@ -39,7 +40,13 @@
                                    <!-- <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Dropdown<i class="material-icons right">arrow_drop_down</i></a></li>-->
                                 </ul>
                                 <ul class="right hide-on-med-and-down">
-                                    <li><a class="dropdown-button" href="#!" data-activates="dropdown1"><i class="material-icons">lock</i></a></li>
+                                    <li><i class="material-icons lock-btn">lock</i></li>
+                                    <li>
+                                        <div class="log-form">
+                                            <input type="email" name="login" id="inputEmail" class="form-control navbar-form" placeholder="E-mail address" required autofocus>
+                                            <input type="password" class="form-control navbar-form" id="inputPassword" name="mdp" placeholder="Password" required>
+                                        </div>
+                                    </li>
                                 </ul>
                                 <ul class="side-nav" id="mobile-demo">
                                     <li><a href="{{ path('es_gaming_game_homepage') }}">Jeux</a></li>
@@ -79,6 +86,15 @@
                 <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
                 <script src="{{ asset('js/materialize.min.js') }}"></script>
                 <script src="{{ asset('js/style.js') }}"></script>
+            {% endblock %}
+
+            {% block foot_script %}
+                <script>
+                    $('.lock-btn').on('click', function () {
+                        $(this).hide();
+                        $('.log-form').show("slow", "swing");
+                    });
+                </script>
             {% endblock %}
     </body>
 </html>

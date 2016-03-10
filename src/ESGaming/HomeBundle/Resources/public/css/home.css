@@ -56,9 +56,11 @@ div.caption.bottom-align
 {
     text-align:center;
     position:absolute;
-    height:200px;
-    bottom: 10px;
+    height:210px;
     top: auto;
+    background-color: rgba(0,0,0,0.6);
+    left: 0% !important;
+    width: 100% !important;
 }
 
 .slider .indicators .indicator-item.active
@@ -69,4 +71,39 @@ div.caption.bottom-align
 .slider .indicators .indicator-item
 {
     background-color: gray;
+}
+
+.indicators {
+    z-index: 2;
+    bottom: 40px !important;
+}
+
+#section0 .fp-tableCell {
+    vertical-align: top;
+}
+
+#main-features {
+    position: absolute;
+    bottom: 0px;
+}
+
+.main-feature {
+    margin: 0px 170px;
+    display: inline-block;
+}
+
+.image-feature {
+    border-radius: 50%;
+}
+
+.image-feature img {
+    height: 64px;
+    width: 64px;
+    bottom: 120px;
+    position: relative;
+}
+
+#twitch-embed {
+    top: 100px;
+    position: absolute;
 }

@@ -2,6 +2,7 @@
 {% block stylesheets %}
     {{ parent() }}
     <link rel="stylesheet" href="{{ asset('bundles/esgaminghome/css/home.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/esgaminghome/css/jquery.fullPage.css') }}">
 {% endblock %}
 
 {% block header %}
@@ -10,30 +11,86 @@
 {% endblock %}
 {% block corps %}
     <div class="corps col s12">
-        <div class="slider">
-            <ul class="slides">
-                <li>
-                    <img src="{{ asset('bundles/esgaminghome/images/lol.jpg') }}"> <!-- random image -->
-                    <div class="caption bottom-align">
-                        <h3>This is our big Tagline!</h3>
-                        <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+        <ul id="menu">
+            <li data-menuanchor="firstPage"><a href="#firstPage">First slide</a></li>
+            <li data-menuanchor="secondPage"><a href="#secondPage">Second slide</a></li>
+            <li data-menuanchor="thirdPage"><a href="#third">Second slide</a></li>
+        </ul>
+
+        <div id="fullpage" class="fullpage-wrapper">
+            <div class="section fp-section active" id="section0" data-anchor="firstPage">
+                <div class="slider">
+                    <ul class="slides">
+                        <li>
+                            <img src="{{ asset('bundles/esgaminghome/images/lol.jpg') }}"> <!-- random image -->
+                            <div class="caption bottom-align">
+                                <h3>This is our big Tagline!</h3>
+                                <h5 class="light grey-text text-lighten-3">Here's our big slogan.</h5>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="{{ asset('bundles/esgaminghome/images/csgo.jpg') }}"> <!-- random image -->
+                            <div class="caption bottom-align">
+                                <h3>This is our big Tagline!</h3>
+                                <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="{{ asset('bundles/esgaminghome/images/fifa.jpg') }}"> <!-- random image -->
+                            <div class="caption bottom-align">
+                                <h3>This is our big Tagline!</h3>
+                                <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div id="main-features">
+                    <div class="main-feature">
+                        <div class="image-feature">
+                            <img src="{{ asset('bundles/esgaminghome/images/twitch.png') }}">
+                        </div>
+                        <h5> Twitch </h5>
+                        Voila la chaine twitch de ESGaming
                     </div>
-                </li>
-                <li>
-                    <img src="{{ asset('bundles/esgaminghome/images/csgo.jpg') }}"> <!-- random image -->
-                    <div class="caption bottom-align">
-                        <h3>This is our big Tagline!</h3>
-                        <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+                    <div class="main-feature">
+                        <div class="image-feature">
+                            <img src="{{ asset('bundles/esgaminghome/images/cup.png') }}">
+                        </div>
+                        <h5> Competitions </h5>
+                        Toutes les compétitions qu'on organise sont ici
                     </div>
-                </li>
-                <li>
-                    <img src="{{ asset('bundles/esgaminghome/images/fifa.jpg') }}"> <!-- random image -->
-                    <div class="caption bottom-align">
-                        <h3>This is our big Tagline!</h3>
-                        <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+                    <div class="main-feature">
+                        <div class="image-feature">
+                            <img src="{{ asset('bundles/esgaminghome/images/guides.png') }}">
+                        </div>
+                        <h5> Guides </h5>
+                        Retrouvez les guides de vos jeux préférés
                     </div>
-                </li>
-            </ul>
+                </div>
+            </div>
+
+            <div class="section fp-section" id="section1" data-anchor="secondPage">
+                <h3>Stream Principal</h3>
+                <div id="twitch-embed">
+                    <div class="twitch-player">
+                        <object type="application/x-shockwave-flash" height="500" width="900"     id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=clodbegamingnetwork" bgcolor="#000000">
+                            <param name="allowFullScreen" value="true" />
+                            <param name="allowScriptAccess" value="always" />
+                            <param name="allowNetworking" value="all" />
+                            <param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" />
+                            <param name="flashvars" value="hostname=www.twitch.tv&channel=drfeelgood&auto_play=true&start_volume=25" />
+                        </object>
+                    </div>
+                    <div class="twitch-chat">
+                        <iframe frameborder="0" scrolling="no" src="http://twitch.tv/drfeelgood/chat?popout=" height="500" width="350">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="section fp-section" id="section2" data-anchor="thirdPage">
+                Page 3
+            </div>
         </div>
     </div>
 
@@ -44,5 +101,25 @@
     {{ parent() }}
     <script src="{{ asset('bundles/esgaminghome/js/slider.js') }}"></script>
     <script src="{{ asset('bundles/esgaminghome/js/nav.js') }}"></script>
+    <script src="{{ asset('bundles/esgaminghome/js/jquery.fullPage.js') }}"></script>
+    <script>
+        $(document).ready(function () {
+            $('#fullpage').fullpage({
+                anchors: ['firstPage','secondPage','thirdPage'],
+
+                afterLoad: function (anchorLink, index) {
+                    if (anchorLink == 'firstPage') {
+                        $('nav').toggleClass('large-navbar');
+                    }
+                },
+
+                onLeave: function (index, nextIndex, direction) {
+                    if (index == 1) {
+                        $('nav').toggleClass('large-navbar');
+                    }
+                }
+            });
+        });
+    </script>
 {% endblock %}
 
