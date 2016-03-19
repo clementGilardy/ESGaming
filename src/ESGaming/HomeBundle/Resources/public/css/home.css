@@ -84,13 +84,18 @@ div.caption.bottom-align
 
 #main-features {
     position: absolute;
-    bottom: 0px;
+    bottom: 70px;
 }
 
 .main-feature {
-    margin: 0px 170px;
+    margin: 0px 70px;
     display: inline-block;
 }
+
+.text-feature {
+    text-align: center;
+}
+
 
 .image-feature {
     border-radius: 50%;
@@ -99,8 +104,10 @@ div.caption.bottom-align
 .image-feature img {
     height: 64px;
     width: 64px;
-    bottom: 120px;
     position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
 }
 
 #twitch-embed {
