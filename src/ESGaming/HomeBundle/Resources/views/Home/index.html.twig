@@ -2,197 +2,129 @@
 {% block stylesheets %}
     {{ parent() }}
     <link rel="stylesheet" href="{{ asset('bundles/esgaminghome/css/home.css') }}">
-
-    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/esgaminghome/css/demo.css') }}" />
-    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/esgaminghome/css/pfold.css') }}" />
-    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/esgaminghome/css/custom2.css') }}" />
-    <script type="text/javascript" src="{{ asset('bundles/esgaminghome/js/modernizr.custom.79639.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('bundles/esgaminghome/css/jquery.fullPage.css') }}">
 {% endblock %}
 
 {% block header %}
-    <header class="col s12">
-        <div class="text">
-            <h1>Vel vel rumore</h1>
-            <p>Minime tibi appellantur est artibus tenent esse ita alios politus quidem satis minime tenent ne alios Epicuri deterruisset te cetero.</p>
-        </div>
-    </header>
+
+
 {% endblock %}
 {% block corps %}
-    <div class="col s10 offset-s1">
-        <div class="slider">
-            <ul class="slides">
-                <li>
-                    <img src="{{ asset('bundles/esgaminghome/images/lol.jpg') }}"> <!-- random image -->
-                    <div class="caption center-align">
-                        <h3>This is our big Tagline!</h3>
-                        <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+    <div class="corps col s12">
+        <ul id="menu">
+            <li data-menuanchor="firstPage"><a href="#firstPage">First slide</a></li>
+            <li data-menuanchor="secondPage"><a href="#secondPage">Second slide</a></li>
+            <li data-menuanchor="thirdPage"><a href="#third">Second slide</a></li>
+        </ul>
+
+        <div id="fullpage" class="fullpage-wrapper">
+            <div class="section fp-section active" id="section0" data-anchor="firstPage">
+                <div class="slider">
+                    <ul class="slides">
+                        <li>
+                            <img src="{{ asset('bundles/esgaminghome/images/lol.jpg') }}"> <!-- random image -->
+                            <div class="caption bottom-align">
+                                <h3>This is our big Tagline!</h3>
+                                <h5 class="light grey-text text-lighten-3">Here's our big slogan.</h5>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="{{ asset('bundles/esgaminghome/images/csgo.jpg') }}"> <!-- random image -->
+                            <div class="caption bottom-align">
+                                <h3>This is our big Tagline!</h3>
+                                <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="{{ asset('bundles/esgaminghome/images/fifa.jpg') }}"> <!-- random image -->
+                            <div class="caption bottom-align">
+                                <h3>This is our big Tagline!</h3>
+                                <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div id="main-features">
+                    <div class="main-feature">
+                        <div class="image-feature">
+                            <img src="{{ asset('bundles/esgaminghome/images/twitch.png') }}">
+                        </div>
+                        <div class="text-feature">
+                            <h5> Twitch </h5>
+                            Voila la chaine twitch de ESGaming
+                        </div>
                     </div>
-                </li>
-                <li>
-                    <img src="{{ asset('bundles/esgaminghome/images/csgo.jpg') }}"> <!-- random image -->
-                    <div class="caption left-align">
-                        <h3>Left Aligned Caption</h3>
-                        <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+                    <div class="main-feature">
+                        <div class="image-feature">
+                            <img src="{{ asset('bundles/esgaminghome/images/cup.png') }}">
+                        </div>
+                        <div class="text-feature">
+                            <h5> Competitions </h5>
+                            Toutes les compétitions qu'on organise sont ici
+                        </div>
                     </div>
-                </li>
-                <li>
-                    <img src="{{ asset('bundles/esgaminghome/images/fifa.jpg') }}"> <!-- random image -->
-                    <div class="caption right-align">
-                        <h3>Right Aligned Caption</h3>
-                        <h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+                    <div class="main-feature">
+                        <div class="image-feature">
+                            <img src="{{ asset('bundles/esgaminghome/images/guides.png') }}">
+                        </div>
+                        <div class="text-feature">
+                            <h5> Guides </h5>
+                            Retrouvez les guides de vos jeux préférés
+                        </div>
                     </div>
-                </li>
-            </ul>
-        </div>
-    </div>
-    <div class="opaque col s12"></div>
-    <div class="change col s12">
-        <div class="texte col s6 offset-s3">
-            <h3>OPERTIS PERICULIS</h3>
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 150.</p>
-        </div>
-    </div>
-    <div class="game col s10 offset-s1">
-        <h2>Plus de jeux</h2>
-        <section class="main demo-2">
-            <div id="grid" class="grid clearfix">
-                <div class="uc-container">
-                    <div class="uc-initial-content">
-                        <img width="200px" height="200" src="{{ asset('bundles/esgaminghome/images/thumbs/HS.png') }}" alt="image01" />
-                        <span class="icon-eye"></span>
-                    </div>
-                    <div class="uc-final-content">
-                        <img width="400px" src="{{ asset('bundles/esgaminghome/images/large/HS.png') }}" alt="image01-large" />
-                        <div class="title"><h4>Heart Stone</h4>jeu de carte créer par blizzard !</div>
-                        <span class="icon-cancel"></span>
-                    </div>
-                </div><!-- / uc-container -->
-                <div class="uc-container">
-                    <div class="uc-initial-content">
-                        <img width="200px" height="200" src="{{ asset('bundles/esgaminghome/images/thumbs/HS.png') }}" alt="image01" />
-                        <span class="icon-eye"></span>
-                    </div>
-                    <div class="uc-final-content">
-                        <img width="400px" src="{{ asset('bundles/esgaminghome/images/large/HS.png') }}" alt="image01-large" />
-                        <div class="title"><h4>The Professor</h4> by Dan Matutina <a href="http://drbl.in/dMLS" class="icon-link"></a></div>
-                        <span class="icon-cancel"></span>
-                    </div>
-                </div><!-- / uc-container -->
-                <div class="uc-container">
-                    <div class="uc-initial-content">
-                        <img width="200px" height="200" src="{{ asset('bundles/esgaminghome/images/thumbs/HS.png') }}" alt="image01" />
-                        <span class="icon-eye"></span>
-                    </div>
-                    <div class="uc-final-content">
-                        <img width="400px" src="{{ asset('bundles/esgaminghome/images/large/HS.png') }}" alt="image01-large" />
-                        <div class="title"><h4>The Professor</h4> by Dan Matutina <a href="http://drbl.in/dMLS" class="icon-link"></a></div>
-                        <span class="icon-cancel"></span>
-                    </div>
-                </div><!-- / uc-container -->
-                <div class="uc-container">
-                    <div class="uc-initial-content">
-                        <img width="200px" height="200" src="{{ asset('bundles/esgaminghome/images/thumbs/HS.png') }}" alt="image01" />
-                        <span class="icon-eye"></span>
-                    </div>
-                    <div class="uc-final-content">
-                        <img width="400px" src="{{ asset('bundles/esgaminghome/images/large/HS.png') }}" alt="image01-large" />
-                        <div class="title"><h4>The Professor</h4> by Dan Matutina <a href="http://drbl.in/dMLS" class="icon-link"></a></div>
-                        <span class="icon-cancel"></span>
-                    </div>
-                </div><!-- / uc-container -->
-                <div class="uc-container">
-                    <div class="uc-initial-content">
-                        <img width="200px" height="200" src="{{ asset('bundles/esgaminghome/images/thumbs/HS.png') }}" alt="image01" />
-                        <span class="icon-eye"></span>
-                    </div>
-                    <div class="uc-final-content">
-                        <img width="400px" src="{{ asset('bundles/esgaminghome/images/large/HS.png') }}" alt="image01-large" />
-                        <div class="title"><h4>The Professor</h4> by Dan Matutina <a href="http://drbl.in/dMLS" class="icon-link"></a></div>
-                        <span class="icon-cancel"></span>
-                    </div>
-                </div><!-- / uc-container -->
-                <div class="uc-container">
-                    <div class="uc-initial-content">
-                        <img width="200px" height="200" src="{{ asset('bundles/esgaminghome/images/thumbs/HS.png') }}" alt="image01" />
-                        <span class="icon-eye"></span>
-                    </div>
-                    <div class="uc-final-content">
-                        <img width="400px" src="{{ asset('bundles/esgaminghome/images/large/HS.png') }}" alt="image01-large" />
-                        <div class="title"><h4>The Professor</h4> by Dan Matutina <a href="http://drbl.in/dMLS" class="icon-link"></a></div>
-                        <span class="icon-cancel"></span>
-                    </div>
-                </div><!-- / uc-container -->
-                <div class="uc-container">
-                    <div class="uc-initial-content">
-                        <img width="200px" height="200" src="{{ asset('bundles/esgaminghome/images/thumbs/HS.png') }}" alt="image01" />
-                        <span class="icon-eye"></span>
-                    </div>
-                    <div class="uc-final-content">
-                        <img width="400px" src="{{ asset('bundles/esgaminghome/images/large/HS.png') }}" alt="image01-large" />
-                        <div class="title"><h4>The Professor</h4> by Dan Matutina <a href="http://drbl.in/dMLS" class="icon-link"></a></div>
-                        <span class="icon-cancel"></span>
-                    </div>
-                </div><!-- / uc-container -->
-                <div class="uc-container">
-                    <div class="uc-initial-content">
-                        <img width="200px" height="200" src="{{ asset('bundles/esgaminghome/images/thumbs/HS.png') }}" alt="image01" />
-                        <span class="icon-eye"></span>
-                    </div>
-                    <div class="uc-final-content">
-                        <img width="400px" src="{{ asset('bundles/esgaminghome/images/large/HS.png') }}" alt="image01-large" />
-                        <div class="title"><h4>The Professor</h4> by Dan Matutina <a href="http://drbl.in/dMLS" class="icon-link"></a></div>
-                        <span class="icon-cancel"></span>
-                    </div>
-                </div><!-- / uc-container -->
+                </div>
             </div>
-        </section>
+
+            <div class="section fp-section" id="section1" data-anchor="secondPage">
+                <h3>Stream Principal</h3>
+                <div id="twitch-embed">
+                    <div class="twitch-player">
+                        <object type="application/x-shockwave-flash" height="500" width="900"     id="live_embed_player_flash" data="http://www.twitch.tv/widgets/live_embed_player.swf?channel=clodbegamingnetwork" bgcolor="#000000">
+                            <param name="allowFullScreen" value="true" />
+                            <param name="allowScriptAccess" value="always" />
+                            <param name="allowNetworking" value="all" />
+                            <param name="movie" value="http://www.twitch.tv/widgets/live_embed_player.swf" />
+                            <param name="flashvars" value="hostname=www.twitch.tv&channel=drfeelgood&auto_play=true&start_volume=25" />
+                        </object>
+                    </div>
+                    <div class="twitch-chat">
+                        <iframe frameborder="0" scrolling="no" src="http://twitch.tv/drfeelgood/chat?popout=" height="500" width="350">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="section fp-section" id="section2" data-anchor="thirdPage">
+                Page 3
+            </div>
+        </div>
     </div>
+
+
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
     <script src="{{ asset('bundles/esgaminghome/js/slider.js') }}"></script>
+    <script src="{{ asset('bundles/esgaminghome/js/nav.js') }}"></script>
+    <script src="{{ asset('bundles/esgaminghome/js/jquery.fullPage.js') }}"></script>
+    <script>
+        $(document).ready(function () {
+            $('#fullpage').fullpage({
+                anchors: ['firstPage','secondPage','thirdPage'],
 
-    <script type="text/javascript" src="{{ asset('bundles/esgaminghome/js/jquery.pfold.js') }}"></script>
-    <script type="text/javascript">
-        $(function() {
-
-            // say we want to have only one item opened at one moment
-            var opened = false;
-
-            $( '#grid > div.uc-container' ).each( function( i ) {
-
-                var $item = $( this ), direction;
-
-                switch( i ) {
-                    case 0 : direction = ['right','bottom']; break;
-                    case 1 : direction = ['left','bottom']; break;
-                    case 2 : direction = ['right','top']; break;
-                    case 3 : direction = ['left','top']; break;
-                }
-
-                var pfold = $item.pfold( {
-                    folddirection : direction,
-                    speed : 300,
-                    onEndFolding : function() { opened = false; },
-                } );
-
-                $item.find( 'span.icon-eye' ).on( 'click', function() {
-
-                    if( !opened ) {
-                        opened = true;
-                        pfold.unfold();
+                afterLoad: function (anchorLink, index) {
+                    if (anchorLink == 'firstPage') {
+                        $('nav').toggleClass('large-navbar');
                     }
+                },
 
-
-                } ).end().find( 'span.icon-cancel' ).on( 'click', function() {
-
-                    pfold.fold();
-
-                } );
-
-            } );
-
+                onLeave: function (index, nextIndex, direction) {
+                    if (index == 1) {
+                        $('nav').toggleClass('large-navbar');
+                    }
+                }
+            });
         });
     </script>
 {% endblock %}

@@ -32,7 +32,7 @@ a {
 
 div.nav-wrapper
 {
-    background: #123e4d;
+    background: #2c2c2c;
 }
 
 div.row
@@ -42,7 +42,7 @@ div.row
 
 nav.col
 {
-    background: #123e4d;
+    background: #2c2c2c;
 }
 
 a.brand-logo
@@ -66,21 +66,34 @@ a.dropdown-button:hover
     background: none;
 }
 
-div.foot.col
-{
-    background: #123e4d;
-    margin-top:20px;
-}
-
-footer.page-footer
-{
-    margin:0;
-    padding:0;
-    height:180px;
-    background: #123e4d;
-}
-
 select{
     display: inline-block;
     width: 8%;
+}
+
+
+.log-form {
+    margin-left: -40px;
+    display: none;
+    -webkit-transition: width 3s;
+    transition: width 3s;
+}
+
+.navbar-form {
+    width: 150px !important;
+}
+
+#menu {
+    display: none;
+}
+
+.large-navbar  {
+    width: 100% !important;
+    margin: 0 !important;
+    left: 0 !important;
+    position: fixed !important;
+}
+
+.twitch-player, .twitch-chat {
+    display: inline-block;
 }
