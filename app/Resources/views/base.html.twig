@@ -19,7 +19,7 @@
                     <div class="row">
                         <ul id="dropdown1" class="dropdown-content">
                             {% if app.user is empty %}
-                                <li><a href="{{ path('login') }}">Se Connecter</a></li>
+                                <li><a href="{{ path('es_gaming_user_login') }}">Se Connecter</a></li>
                                 <li><a href="{{ path('es_gaming_user_register') }}">S'inscrire</a></li>
                             {% else %}
                                 <li> <a href="{{ path('es_gaming_user_profile') }}">Afficher mon profil</a> </li>
@@ -55,7 +55,7 @@
                                     <li><a href="{{ path('es_gaming_event_homepage') }}">Event</a></li>
                                     <li><a href="badges.html">A propos</a></li>
                                     {% if app.user is empty %}
-                                        <li><a href="{{ path('login') }}">Se Connecter</a></li>
+                                        <li><a href="{{ path('es_gaming_user_login') }}">Se Connecter</a></li>
                                         <li><a href="{{ path('es_gaming_user_register') }}">S'inscrire</a></li>
                                     {% else %}
                                         <li> <a href="{{ path('es_gaming_user_profile') }}">Afficher mon profil</a> </li>
