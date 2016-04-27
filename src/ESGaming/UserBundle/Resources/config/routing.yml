@@ -1,5 +1,5 @@
 es_gaming_user_homepage:
-    path:     /index
+    path: /index
     defaults: { _controller: ESGamingUserBundle:User:index }
 
 es_gaming_user_register:
@@ -11,7 +11,7 @@ es_gaming_user_login:
     defaults: { _controller: ESGamingUserBundle:User:login }
 
 es_gaming_user_get:
-    path: /user/{id}
+    path: /{id}
     defaults: { _controller: ESGamingUserBundle:User:user }
     requirements:
         id: \d+
