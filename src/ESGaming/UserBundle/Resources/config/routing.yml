@@ -1,7 +1,3 @@
-es_gaming_user_homepage:
-    path: /index
-    defaults: { _controller: ESGamingUserBundle:User:index }
-
 es_gaming_user_register:
     path: /register
     defaults: { _controller: ESGamingUserBundle:User:register }
