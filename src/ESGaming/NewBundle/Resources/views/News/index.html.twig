@@ -10,11 +10,11 @@
                     <span class="card-title activator grey-text text-darken-4">{{ new.title }}<i class="material-icons right">more_vert</i></span>
                 </div>
                 <div class="card-action">
-                    <a href="#">Lire la suite</a>
+                    <a href="{{ path('es_gaming_new_get',{'id':new.id}) }}">Lire la suite</a>
                 </div>
                 <div class="card-reveal">
                     <span class="card-title grey-text text-darken-4">{{ new.title }}<i class="material-icons right">close</i></span>
-                    <p>{{ new.text | truncate(20, true, '...') }}</p>
+                    <p>{{ new.text | truncate(200, true, '...') }}</p>
                 </div>
             </div>
         </div>
