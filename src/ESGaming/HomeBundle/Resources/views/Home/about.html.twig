@@ -1,0 +1,12 @@
+{% extends "@ESGamingHome/layout.html.twig" %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/esgaminghome/css/about.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/esgaminghome/css/jquery.fullPage.css') }}">
+{% endblock %}
+{% block corps %}
+    <div class="about-card">
+        <div class="about-title">A propos<hr class="horizontal-bar"></div>
+        Le site ESGaming a pour origines, la volonté de deux amis d’avoir un site le plus complet possible pour les fans d’E-Sport. Il en a découlé la création du projet au sein du groupe Ynov. Qui, grâce à la volonté et au travail de chaque membres du projet, a pu voir le jour en 2016. Le projet fut composé part 14 personnes ayant chacun des qualités et des connaissances différentes mais réunis par une seule passion : le jeu vidéo.
+    </div>
+{% endblock %}

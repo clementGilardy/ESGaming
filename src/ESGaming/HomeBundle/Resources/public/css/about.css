@@ -1,0 +1,14 @@
+div.about-card{
+    padding:5px;
+    background-color: white;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+}
+
+div.about-title{
+    margin-bottom:5px;
+    font-size: 26px;
+}
+
+.about-title hr.horizontal-bar{
+    opacity: 0.7;
+}
