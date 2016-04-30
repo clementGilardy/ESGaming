@@ -1,0 +1,37 @@
+{% extends "@ESGamingHome/layout.html.twig" %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/esgaminghome/css/about.css') }}">
+{% endblock %}
+{% block corps %}
+    <div class="col s8 offset-s2">
+        <div class="about-card">
+            <div class="about-title">Le Principe<hr class="horizontal-bar"></div>
+            <p>Avec le développement permanent des jeux vidéo et de la compétition il a semblé évident de vouloir la création
+            d'un site d'envergure pour ce monde qu'est l'E-Sport. Un site pouvant regrouper tout ce qu'une personne
+            pourrait rechercher sur ce monde que ce soit :</p>
+            <ol>
+                <li>Les compétitions en streaming live</li>
+                <li>Des actualités sur les équipes, jeux, et joueurs préférés</li>
+                <li>Des tutoriels permettant de s'améliorer</li>
+                <li>Des tournois</li>
+                <li>Des astuces</li>
+            </ol><br>
+            <p>Cela permettrait donc d'avoir le site le plus complet possible afin de faciliter
+                les recherches de tout le monde.</p>
+            <div class="about-title">Le Site<hr class="horizontal-bar"></div>
+            <p>Dans la première version du site, tout ne pouvant pas être disponible, il n'y aura que 3 jeux couvert par
+            le site, ces jeux étant considérés comme les plus compétitifs aux yeux de la communauté. Ces jeux étant :</p>
+            <ol>
+                <li>League of Legends</li>
+                <li>Counter Strike : Global Offensive</li>
+                <li>FIFA</li>
+            </ol><br>
+            <p>Toutes les fonctionnalités ne seront pas non plus disponibles et viendront au fur et à mesure du
+            temps s'ajouter à celles déjà présentes</p>
+            <div class="about-title">Les Origines<hr class="horizontal-bar"></div>
+            <p>Le site fût l'idée de deux amis à l'origine puis fût mis en place au sein du groupe Ynov. Qui grâce à la
+                volonté et au travail de chaque membres du projet, a pu voir le jour en 2016</p>
+        </div>
+    </div>
+{% endblock %}

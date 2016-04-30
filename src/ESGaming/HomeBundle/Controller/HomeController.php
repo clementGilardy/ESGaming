@@ -13,4 +13,9 @@ class HomeController extends Controller
 
         return $this->render('ESGamingHomeBundle:Home:index.html.twig',array('games'=>$games));
     }
+
+    public function aboutAction()
+    {
+        return $this->render('ESGamingHomeBundle:Home:about.html.twig');
+    }
 }

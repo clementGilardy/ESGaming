@@ -21,10 +21,6 @@ use ESGaming\UserBundle\Form\Model\ChangePassword;
 
 class UserController extends Controller
 {
-    public function indexAction($user)
-    {
-        return $this->render('ESGamingUserBundle:User:index.html.twig', array('user' => $user));
-    }
 
     public function registerAction(Request $request)
     {
@@ -37,7 +33,7 @@ class UserController extends Controller
     ))
         ->add('last_name', 'text',array('label'=>'Nom'))
         ->add('nickname', 'text',array('label'=>'Pseudo'))
-        ->add('birthDate', 'date', array('widget'=>'single_text'))
+        ->add('birthDate', 'date', array('widget'=>'single_text','format' => 'yyyy-MM-dd'))
         ->add('mail', 'text')
         ->add('password', 'repeated',
             array(
@@ -161,7 +157,7 @@ class UserController extends Controller
     {
         // Si le visiteur est déjà identifié, on le redirige vers l'accueil
         if ($this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
-            return $this->redirect($this->generateUrl('es_gaming_user_homepage:'));
+            return $this->redirect($this->generateUrl('es_gaming_user_get',array('id'=>$this->get('security.context')->getToken()->getUser()->getId())));
         }
 
         $request = $this->getRequest();

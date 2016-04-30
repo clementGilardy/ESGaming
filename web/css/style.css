@@ -30,6 +30,10 @@ a {
     position: relative;
 }
 
+.container{
+    margin-top:80px;
+}
+
 div.nav-wrapper
 {
     background: #2c2c2c;

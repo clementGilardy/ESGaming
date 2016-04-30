@@ -1,3 +1,7 @@
 es_gaming_home_homepage:
     path:     /
     defaults: { _controller: ESGamingHomeBundle:Home:index }
+
+es_gaming_home_about:
+    path: /about
+    defaults: { _controller: ESGamingHomeBundle:Home:about }
