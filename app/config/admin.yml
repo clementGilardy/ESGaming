@@ -17,7 +17,6 @@ services:
             - ~
         calls:
             - [ setEntityManager, [@doctrine.orm.entity_manager]]
-            - [ setTemplate, [list, ESGamingAdminBundle:GameAdmin:list.html.twig]]
 
     sonata.admin.new:
         class: ESGaming\AdminBundle\Admin\NewAdmin

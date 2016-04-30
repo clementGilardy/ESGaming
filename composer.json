@@ -31,7 +31,9 @@
         "friendsofsymfony/oauth-server-bundle": "^1.5",
         "sonata-project/intl-bundle": "^2.2",
         "stof/doctrine-extensions-bundle": "^1.2",
-        "sonata-project/jquery-bundle": "^1.10"
+        "sonata-project/jquery-bundle": "^1.10",
+        "sonata-project/formatter-bundle": "^2.3@dev",
+        "sonata-project/markitup-bundle": "^2.1"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

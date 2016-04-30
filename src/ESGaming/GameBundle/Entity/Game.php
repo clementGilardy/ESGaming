@@ -3,6 +3,7 @@
 namespace ESGaming\GameBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Game
@@ -105,6 +106,11 @@ class Game
     private $logo;
 
     /**
+     * @Assert\File(maxSize="1M")
+     */
+    private $logoFile;
+
+    /**
      * @var array
      *
      * @ORM\Column(name="classification", type="array")
@@ -117,6 +123,11 @@ class Game
      * @ORM\Column(name="banner", type="string", length=255)
      */
     private $banner;
+
+    /**
+     * @Assert\File(maxSize="1M")
+     */
+    private $bannerFile;
 
     /**
      * @var string
@@ -405,6 +416,77 @@ class Game
     public function getLogo()
     {
         return $this->logo;
+    }
+
+    public function getLogoFile()
+    {
+        return $this->logoFile;
+    }
+
+    public function setLogoFile($f)
+    {
+        $this->logoFile = $f;
+    }
+
+    public function getBannerFile()
+    {
+        return $this->bannerFile;
+    }
+
+    public function setBannerFile($f)
+    {
+        $this->bannerFile = $f;
+    }
+
+    public function getUploadRootDir()
+    {
+        return __DIR__.'/../../../../web/'.$this->getUploadDir();
+    }
+
+    public function getUploadDir()
+    {
+        return 'uploads/game_images';
+    }
+
+    /**
+     * @ORM\PrePersist()
+     * @ORM\PreUpdate()
+     */
+    public function preUpload()
+    {
+        if (null !== $this->bannerFile) {
+            // faites ce que vous voulez pour générer un nom unique
+            $this->banner = sha1(uniqid(mt_rand(), true)).'.'.$this->bannerFile->guessExtension();
+        }
+
+        if (null !== $this->logoFile) {
+            // faites ce que vous voulez pour générer un nom unique
+            $this->logo = sha1(uniqid(mt_rand(), true)).'.'.$this->logoFile->guessExtension();
+        }
+    }
+
+    /**
+     * @ORM\PostPersist()
+     * @ORM\PostUpdate()
+     */
+    public function upload()
+    {
+        if (null === $this->bannerFile && null === $this->logoFile) {
+            return;
+        } else {
+
+            if(null !== $this->logoFile) {
+                $this->logoFile->move($this->getUploadRootDir(), $this->logoFile->getClientOriginalName());
+                $this->logo = $this->getUploadDir().'/'.$this->logoFile->getClientOriginalName();
+                $this->logoFile = null;
+            }
+
+            if(null !== $this->bannerFile) {
+                $this->bannerFile->move($this->getUploadRootDir(), $this->bannerFile->getClientOriginalName());
+                $this->banner = $this->getUploadDir().'/'.$this->bannerFile->getClientOriginalName();
+                $this->bannerFile = null;
+            }
+        }
     }
 
     /**
