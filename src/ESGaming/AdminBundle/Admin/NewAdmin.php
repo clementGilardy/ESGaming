@@ -72,7 +72,7 @@ class NewAdmin extends Admin
     public function getNewInstance()
     {
         $instance = parent::getNewInstance();
-        $author = $this->em->getRepository('ESGamingUserBundle:User')->find(3);
+        $author = $this->em->getRepository('ESGamingUserBundle:User')->find(27);
         $status = $this->em->getRepository('ESGamingNewBundle:Status')->find(1);
         $type = $this->em->getRepository('ESGamingNewBundle:Type')->find(1);
         $instance->setStatus($status);

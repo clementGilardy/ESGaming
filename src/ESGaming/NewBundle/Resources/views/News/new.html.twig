@@ -18,10 +18,9 @@
          <div class="about-title2">plus de news<hr class="horizontal-bar"></div>
          <ul>
             {% for n in news %}
-
+               {% if n != new %}
                   <li><a href="{{ path('es_gaming_new_get',{'id':n.id}) }}">{{ n.title | truncate(30,true,'...')}}</a></li>
-
-
+               {% endif %}
             {% endfor %}
          </ul>
       </div>
