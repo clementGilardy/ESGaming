@@ -81,11 +81,13 @@ class NewsController extends Controller
         $repository = $this->getDoctrine()->getManager()->getRepository('ESGamingNewBundle:News');
         $new        = $repository->find($id);
 
+        $news       = $repository->findByType(1);
+
         if($new === null) {
             throw new NotFoundHttpException("L'annonce n°$id n'existe pas");
         }
 
-        return $this->render('ESGamingNewBundle:News:new.html.twig',array('new'=>$new));
+        return $this->render('ESGamingNewBundle:News:new.html.twig',array('new'=>$new,'news'=>$news));
     }
 
     /**

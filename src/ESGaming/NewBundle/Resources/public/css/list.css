@@ -19,13 +19,3 @@ div.about-title2{
 .about-title hr.horizontal-bar{
     opacity: 0.7;
 }
-
-ol{
-    color:black;
-    list-style: circle;
-    margin-left: 30px;
-}
-
-p{
-    margin-bottom: 10px;
-}
