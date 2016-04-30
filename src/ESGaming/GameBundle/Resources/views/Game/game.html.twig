@@ -1,30 +1,31 @@
-{% extends "@ESGamingNew/layout.html.twig" %}
+{% extends "@ESGamingGame/layout.html.twig" %}
 {% block stylesheets %}
    {{ parent() }}
-   <link rel="stylesheet" href="{{ asset('bundles/esgamingnew/css/list.css') }}">
+   <link rel="stylesheet" href="{{ asset('bundles/esgaminggame/css/list.css') }}">
 {% endblock %}
 {% block corps %}
 
-   <div class="col s7 offset-s2">
-      <img height="200" width="100%" src="{{ asset(new.mainBanner) }}">
+   <div class="col s12">
+      <img height="200" width="100%" src="{{ asset(game.Banner) }}">
       <div class="about-card">
-         <div class="about-title">{{ new.title }}<hr class="horizontal-bar"></div>
-         {{ new.text|raw }}
+         <div class="about-title">{{ game.name }}<hr class="horizontal-bar"></div>
+         {{ game.descLong|raw }}
       </div>
    </div>
 
-   <div class="col s3">
+{#   <div class="col s3">
       <div class="about-card">
          <div class="about-title2">plus de news<hr class="horizontal-bar"></div>
          <ul>
             {% for n in news %}
-               {% if n != new %}
+
                   <li><a href="{{ path('es_gaming_new_get',{'id':n.id}) }}">{{ n.title | truncate(30,true,'...')}}</a></li>
-               {% endif %}
+
+
             {% endfor %}
          </ul>
       </div>
-   </div>
+   </div>#}
 
 
 {% endblock %}

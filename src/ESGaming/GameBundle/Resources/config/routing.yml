@@ -1,3 +1,25 @@
 es_gaming_game_homepage:
     path:     /
-    defaults: { _controller: ESGamingGameBundle:Default:index }
+    defaults: { _controller: ESGamingGameBundle:Game:index }
+
+es_gaming_game_add:
+    path: /add
+    defaults: { _controller: ESGamingGameBundle:Game:add }
+
+es_gaming_game_update:
+    path: /update/{id}
+    defaults: { _controller: ESGamingGameBundle:Game:add }
+    requirements:
+        id: \d+
+
+es_gaming_game_get:
+    path: /{id}
+    defaults: { _controller: ESGamingGameBundle:Game:game }
+    requirements:
+        id: \d+
+
+es_gaming_game_delete:
+    path: /remove/{id}
+    defaults: { _controller: ESGamingGameBundle:Game:delete}
+    requirements:
+        id: \d+

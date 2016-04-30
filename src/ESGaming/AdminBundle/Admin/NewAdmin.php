@@ -8,6 +8,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
+use ESGaming\UserBundle\Entity\User;
 use ESGaming\NewBundle\Entity\News;
 
 
@@ -59,7 +60,8 @@ class NewAdmin extends Admin
             ->add('title',null,array('label' => 'Titre de la news'))
             ->add('subtitle',null,array('label' => 'Sous-titre'))
             ->add('text','ckeditor')
-            ->add('main_banner','file',array('label' => 'Image', 'data_class' => null));
+            ->add('main_banner','file',array('label' => 'Image', 'data_class' => null))
+            ->add('author','entity',array('label' => 'Auteur', 'class' => 'ESGamingUserBundle:User', 'property' => 'nickname'));
     }
 
     // Fields to be shown on filter forms
@@ -72,12 +74,10 @@ class NewAdmin extends Admin
     public function getNewInstance()
     {
         $instance = parent::getNewInstance();
-        $author = $this->em->getRepository('ESGamingUserBundle:User')->find(27);
         $status = $this->em->getRepository('ESGamingNewBundle:Status')->find(1);
         $type = $this->em->getRepository('ESGamingNewBundle:Type')->find(1);
         $instance->setStatus($status);
         $instance->setType($type);
-        $instance->setAuthor($author);
 
         return $instance;
     }
